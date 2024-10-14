@@ -6,7 +6,7 @@
 <div class="container mt-5">
     <h2>Claim Submission</h2>
     <!-- Form - submit the claim (Updated with hourly rate and notes)-->
-    <form method="post" action="@Url.Action("SubmitClaim", "Home")">
+    <form method="post" enctype="multipart/form-data" action="@Url.Action("SubmitClaim", "Home")">
         <!-- Form - lecturer can input name -->
         <div class="form-group">
             <label for="lecturer">Lecturer Name:</label>
@@ -26,7 +26,11 @@
             <label for="notes">Additional Notes:</label>
             <textarea id="notes" name="notes" class="form-control" placeholder="Add any additional notes here" style="width: 250px; height: 100px;"></textarea>
         </div>
-
+        <!-- Supporting Document Upload -->
+        <div class="form-group">
+            <label for="document">Supporting Document (PDF, DOCX, XLSX - Max 5MB):</label>
+            <input type="file" id="document" name="document" class="form-control-file" accept=".pdf,.docx,.xlsx" />
+        </div>
         <!-- Submit button -->
         <div>
             <button type="submit" class="btn btn-success" style="width: 200px; height: 40px;">Submit Claim</button>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using ClaimSystem.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 namespace ClaimSystem.Controllers
 {
@@ -29,8 +30,45 @@ namespace ClaimSystem.Controllers
 
         // SubmitClaim action - handles POST requests to submit claims
         [HttpPost]
-        public IActionResult SubmitClaim(string lecturer, decimal hoursWorked, decimal hourlyRate, string notes)
+        public IActionResult SubmitClaim(string lecturer, decimal hoursWorked, decimal hourlyRate, string notes, IFormFile document)
         {
+            // Validate file upload
+            string filePath = null;
+
+            if (document != null && document.Length > 0)
+            {
+                // File size validation (limit: 5MB)
+                if (document.Length > 5 * 1024 * 1024)
+                {
+                    ModelState.AddModelError("File", "The file size cannot exceed 5MB.");
+                    return View("ClaimSubmission");
+                }
+
+                // File type validation
+                var allowedExtensions = new[] { ".pdf", ".docx", ".xlsx" };
+                var extension = Path.GetExtension(document.FileName).ToLowerInvariant();
+
+                if (!allowedExtensions.Contains(extension))
+                {
+                    ModelState.AddModelError("File", "Only .pdf, .docx, and .xlsx files are allowed.");
+                    return View("ClaimSubmission");
+                }
+
+                // Sav  file to server (in wwwroot/uploads)
+                var uploadsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                if (!Directory.Exists(uploadsDirectory))
+                {
+                    Directory.CreateDirectory(uploadsDirectory);
+                }
+
+                var uniqueFileName = Path.GetRandomFileName() + extension;
+                filePath = Path.Combine(uploadsDirectory, uniqueFileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    document.CopyTo(stream);
+                }
+            }
+
             // Create new claim based on submitted data
             var newClaim = new Claim
             {
@@ -40,7 +78,8 @@ namespace ClaimSystem.Controllers
                 HourlyRate = hourlyRate, // Hourly rate
                 Notes = notes, // Notes added
                 Status = "Pending",
-                LastUpdated = System.DateTime.Now
+                LastUpdated = System.DateTime.Now,
+                SupportingDocumentPath = filePath  // Store file path in claim
             };
 
             // Add new claim to list

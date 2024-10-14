@@ -17,6 +17,7 @@
                                       <th>Notes</th>
                                       <th>Status</th>
                                       <th>Last Updated</th>
+                                      <th>Document</th> <!-- Document column -->
                                   </tr>
                               </thead>
                               <tbody>
@@ -31,6 +32,17 @@
                                       <td>@claim.Notes</td>
                                       <td>@claim.Status</td>
                                       <td>@claim.LastUpdated.ToString("g")</td>
+                                      <td>
+                                          @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
+                        {
+                                          <a href="/uploads/@System.IO.Path.GetFileName(claim.SupportingDocumentPath)" target="_blank">View Document</a>
+
+                        }
+                        else
+                        {
+                                          <span>No document</span>
+                        }
+                                      </td>
                                   </tr>
             }
                               </tbody>

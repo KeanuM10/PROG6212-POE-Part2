@@ -14,6 +14,7 @@
                 <th>Lecturer</th>
                 <th>Hours</th>
                 <th>Status</th>
+                <th>Document</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,6 +27,16 @@
                     <td>@claim.Lecturer</td>
                     <td>@claim.Hours</td>
                     <td>@claim.Status</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
+                        {
+                        <a href="@Url.Content("~/uploads/" + System.IO.Path.GetFileName(claim.SupportingDocumentPath))" target="_blank">View Document</a>
+                        }
+                        else
+                        {
+                        <span>No document</span>
+                        }
+                    </td>
                     <td>
                         <!-- Buttons to approve / reject claim -->
                         <a href="@Url.Action("ApproveClaim", "Home", new { id = claim.ClaimID })" class="btn btn-success" style="width: 200px; height: 40px;">Approve</a>

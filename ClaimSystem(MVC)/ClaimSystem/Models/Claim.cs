@@ -25,5 +25,8 @@ namespace ClaimSystem.Models
         // Timestamp for last update for claim
         public DateTime LastUpdated { get; set; } = DateTime.Now;
 
+        // Path for the supporting document
+        public string? SupportingDocumentPath { get; set; }  // Nullable - allows no file submission
+
     }
 }
