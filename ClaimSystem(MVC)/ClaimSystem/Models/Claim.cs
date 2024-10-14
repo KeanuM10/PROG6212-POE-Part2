@@ -13,10 +13,17 @@ namespace ClaimSystem.Models
         // Hours worked (int)
         public int Hours { get; set; }
 
+        // Hourly rate for claim
+        public decimal HourlyRate { get; set; }
+
+        // Additional notes for claim
+        public string Notes { get; set; } = string.Empty;
+
         // Current claim status - (Pending, Approved, Rejected)
         public string Status { get; set; } = "Pending";  // Default - Pending
 
         // Timestamp for last update for claim
         public DateTime LastUpdated { get; set; } = DateTime.Now;
+
     }
 }

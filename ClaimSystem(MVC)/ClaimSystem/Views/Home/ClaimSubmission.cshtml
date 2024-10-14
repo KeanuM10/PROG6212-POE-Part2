@@ -5,12 +5,24 @@
 
 <div class="container mt-5">
     <h2>Claim Submission</h2>
-    <!-- Form - submit the claim -->
+    <!-- Form - submit the claim (Updated with hourly rate and notes)-->
     <form method="post" action="@Url.Action("SubmitClaim", "Home")">
         <div class="form-group">
             <label for="hoursWorked">Hours Worked:</label>
             <input type="number" id="hoursWorked" name="hoursWorked" class="form-control" placeholder="Enter hours worked" style="width: 250px; height: 40px;" required />
         </div>
+
+        <!-- Hourly rate set to 0.01 - allows decimals (will be better later on) -->
+        <div class="form-group">
+            <label for="hourlyRate">Hourly Rate:</label>
+            <input type="number" id="hourlyRate" name="hourlyRate" class="form-control" placeholder="Enter hourly rate" style="width: 250px; height: 40px;" step="0.01" required />
+        </div>
+        <div class="form-group">
+            <label for="notes">Additional Notes:</label>
+            <textarea id="notes" name="notes" class="form-control" placeholder="Add any additional notes here" style="width: 250px; height: 100px;"></textarea>
+        </div>
+
+        <!-- Submit button -->
         <div>
             <button type="submit" class="btn btn-success" style="width: 200px; height: 40px;">Submit Claim</button>
         </div>

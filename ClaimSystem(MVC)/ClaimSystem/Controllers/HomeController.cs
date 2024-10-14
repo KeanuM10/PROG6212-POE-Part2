@@ -28,7 +28,7 @@ namespace ClaimSystem.Controllers
 
         // SubmitClaim action - handles POST requests to submit claims
         [HttpPost]
-        public IActionResult SubmitClaim(int hoursWorked)
+        public IActionResult SubmitClaim(int hoursWorked, decimal hourlyRate, string notes)
         {
             // Create new claim based on submitted data
             var newClaim = new Claim
@@ -36,6 +36,8 @@ namespace ClaimSystem.Controllers
                 ClaimID = _claims.Count + 1,
                 Lecturer = "New Lecturer", // Placeholder for lecturer
                 Hours = hoursWorked,
+                HourlyRate = hourlyRate, // Hourly rate
+                Notes = notes, // Notes added
                 Status = "Pending",
                 LastUpdated = System.DateTime.Now
             };

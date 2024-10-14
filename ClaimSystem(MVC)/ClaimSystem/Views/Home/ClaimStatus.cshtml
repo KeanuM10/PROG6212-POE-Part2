@@ -13,6 +13,8 @@
                 <th>Claim ID</th>
                 <th>Lecturer</th>
                 <th>Hours</th>
+                <th>Hourly Rate</th>
+                <th>Notes</th>
                 <th>Status</th>
                 <th>Last Updated</th>
             </tr>
@@ -25,6 +27,8 @@
                     <td>@claim.ClaimID</td>
                     <td>@claim.Lecturer</td>
                     <td>@claim.Hours</td>
+                    <td>@claim.HourlyRate</td> <!-- Hourly Rate and Notes added -->
+                    <td>@claim.Notes</td>
                     <td>@claim.Status</td>
                     <td>@claim.LastUpdated.ToString("g")</td>
                 </tr>
