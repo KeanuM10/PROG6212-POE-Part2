@@ -10,8 +10,8 @@ namespace ClaimSystem.Controllers
         // Static list of claims to acts as database storage
         private static List<Claim> _claims = new()
         {
-            new Claim { ClaimID = 1, Lecturer = "John Doe", Hours = 20, Status = "Pending", LastUpdated = System.DateTime.Now },
-            new Claim { ClaimID = 2, Lecturer = "Jane Smith", Hours = 15, Status = "Pending", LastUpdated = System.DateTime.Now }
+            new Claim { ClaimID = 1, Lecturer = "John Doe", Hours = 20, HourlyRate = 100, Notes = "Prog class", Status = "Pending", LastUpdated = System.DateTime.Now },
+            new Claim { ClaimID = 2, Lecturer = "Jane Smith", Hours = 15, HourlyRate = 150, Notes = "Tutoring services", Status = "Pending", LastUpdated = System.DateTime.Now }
         };
 
         // Index action - displays welcome screen
@@ -28,13 +28,13 @@ namespace ClaimSystem.Controllers
 
         // SubmitClaim action - handles POST requests to submit claims
         [HttpPost]
-        public IActionResult SubmitClaim(int hoursWorked, decimal hourlyRate, string notes)
+        public IActionResult SubmitClaim(string lecturer, decimal hoursWorked, decimal hourlyRate, string notes)
         {
             // Create new claim based on submitted data
             var newClaim = new Claim
             {
                 ClaimID = _claims.Count + 1,
-                Lecturer = "New Lecturer", // Placeholder for lecturer
+                Lecturer = lecturer, // Lecturer can now input own name
                 Hours = hoursWorked,
                 HourlyRate = hourlyRate, // Hourly rate
                 Notes = notes, // Notes added

@@ -11,7 +11,7 @@ namespace ClaimSystem.Models
         public string Lecturer { get; set; } = string.Empty;  // Initialize as empty - avoid null problems
 
         // Hours worked (int)
-        public int Hours { get; set; }
+        public decimal Hours { get; set; }
 
         // Hourly rate for claim
         public decimal HourlyRate { get; set; }

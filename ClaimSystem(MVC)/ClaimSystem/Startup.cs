@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace ClaimSystem
 {
@@ -16,6 +18,15 @@ namespace ClaimSystem
         // Method to configure 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Set culture of app - uses 'en-US' - this allows '.' to be the decimal operator
+            var supportedCultures = new[] { new CultureInfo("en-US") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),  // Default culture set - "en-US"
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();  // Show errors
