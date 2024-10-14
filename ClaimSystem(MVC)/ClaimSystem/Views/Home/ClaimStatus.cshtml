@@ -5,34 +5,38 @@
     ViewData["Title"] = "Claim Status";  // Set page title
 }
 
-<div class="container mt-5">
-    <h2>Claim Status</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Claim ID</th>
-                <th>Lecturer</th>
-                <th>Hours</th>
-                <th>Hourly Rate</th>
-                <th>Notes</th>
-                <th>Status</th>
-                <th>Last Updated</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Loop through claims - display status -->
-            @foreach (var claim in Model)
+                      <div class="container mt-5">
+                          <h2>Claim Status</h2>
+                          <table class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>Claim ID</th>
+                                      <th>Lecturer</th>
+                                      <th>Hours</th>
+                                      <th>Hourly Rate</th>
+                                      <th>Notes</th>
+                                      <th>Status</th>
+                                      <th>Last Updated</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <!-- Loop through claims - display status -->
+                                  @foreach (var claim in Model)
             {
-                <tr>
-                    <td>@claim.ClaimID</td>
-                    <td>@claim.Lecturer</td>
-                    <td>@claim.Hours</td>
-                    <td>@claim.HourlyRate</td> <!-- Hourly Rate and Notes added -->
-                    <td>@claim.Notes</td>
-                    <td>@claim.Status</td>
-                    <td>@claim.LastUpdated.ToString("g")</td>
-                </tr>
+                                  <tr>
+                                      <td>@claim.ClaimID</td>
+                                      <td>@claim.Lecturer</td>
+                                      <td>@claim.Hours</td>
+                                      <td>@claim.HourlyRate</td> <!-- Hourly Rate and Notes added -->
+                                      <td>@claim.Notes</td>
+                                      <td>@claim.Status</td>
+                                      <td>@claim.LastUpdated.ToString("g")</td>
+                                  </tr>
             }
-        </tbody>
-    </table>
-</div>
+                              </tbody>
+                          </table>
+
+                          <!-- Redirect to Login page (For admins) -->
+                          <a href="@Url.Action("Login", "Home")" class="btn btn-primary mt-3">Go to Admin Login</a>
+
+                      </div>

@@ -12,7 +12,8 @@ namespace ClaimSystem
         // Method to configure
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(); 
+            services.AddControllersWithViews();
+            services.AddSession(); // Enable session
         }
 
         // Method to configure 
@@ -40,8 +41,8 @@ namespace ClaimSystem
             app.UseHttpsRedirection();  // Redirect to HTTPS
             app.UseStaticFiles();  
 
-            app.UseRouting();  
-
+            app.UseRouting();
+            app.UseSession(); // Use session
             app.UseAuthorization();  
 
             // Routing for application

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using ClaimSystem.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,10 +50,50 @@ namespace ClaimSystem.Controllers
             return RedirectToAction("ClaimStatus");
         }
 
+        // GET: Login page
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Login process
+        [HttpPost]
+        public IActionResult Login(string username, string password)
+        {
+            // Role login
+            if (username == "coordinator" && password == "123")
+            {
+                HttpContext.Session.SetString("UserRole", "Coordinator");
+                return RedirectToAction("ClaimApproval");
+            }
+            else if (username == "manager" && password == "123")
+            {
+                HttpContext.Session.SetString("UserRole", "Manager");
+                return RedirectToAction("ClaimApproval");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Invalid username or password.";
+                return View();
+            }
+        }
+
+        // Logout action
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();  // Clear session
+            return RedirectToAction("Login");
+        }
+
         // ClaimApproval action - shows pending claims for approval / rejection
         public IActionResult ClaimApproval()
         {
             // Filter and give only pending claims
+            if (HttpContext.Session.GetString("UserRole") == null)
+            {
+                return RedirectToAction("Login");
+            }
+
             return View(_claims.Where(c => c.Status == "Pending").ToList());
         }
 
@@ -93,6 +134,12 @@ namespace ClaimSystem.Controllers
         {
             // Pass list of claims to view
             return View(_claims);
+        }
+
+        // Error action
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
