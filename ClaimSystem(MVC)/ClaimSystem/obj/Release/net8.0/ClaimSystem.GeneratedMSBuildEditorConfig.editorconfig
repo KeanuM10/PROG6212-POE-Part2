@@ -1,0 +1,63 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ClaimSystem
+build_property.RootNamespace = ClaimSystem
+build_property.ProjectDir = C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/Home/ClaimApproval.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDbGFpbUFwcHJvdmFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/Home/ClaimStatus.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDbGFpbVN0YXR1cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/Home/ClaimSubmission.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDbGFpbVN1Ym1pc3Npb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/Shared/ClaimSubmission - Copy (3).cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENsYWltU3VibWlzc2lvbiAtIENvcHkgKDMpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/demos/OneDrive/Documents/GitHub/PROG6212-POE-Part2/ClaimSystem(MVC)/ClaimSystem/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-i2mcz1xn4i

@@ -1,0 +1,8 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Ignore Visual Studio temporary files, build results, and
+# build directories.
+
+.vs/
+

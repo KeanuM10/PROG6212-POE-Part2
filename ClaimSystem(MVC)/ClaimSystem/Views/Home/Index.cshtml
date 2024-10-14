@@ -1,0 +1,12 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use same layout
+    ViewData["Title"] = "Welcome";  // Set page title
+}
+
+<div class="container text-center mt-5">
+    <h1>Welcome to the Claim System</h1>
+    <!-- Button - enter app & navigate to claim submission page -->
+    <button class="btn btn-success mt-5" style="width: 250px; height: 50px;" onclick="location.href='@Url.Action("ClaimSubmission", "Home")'">
+        Enter Application
+    </button>
+</div>

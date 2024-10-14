@@ -1,0 +1,61 @@
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.AssemblyInfoInputs.cache
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.AssemblyInfo.cs
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.csproj.CoreCompileInputs.cache
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.RazorAssemblyInfo.cache
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.RazorAssemblyInfo.cs
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\appsettings.json
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.staticwebassets.runtime.json
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.exe
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.deps.json
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.runtimeconfig.json
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.dll
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.pdb
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets\msbuild.ClaimSystem.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets\msbuild.build.ClaimSystem.props
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ClaimSystem.props
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ClaimSystem.props
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\scopedcss\bundle\ClaimSystem.styles.css
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\scopedcss\projectbundle\ClaimSystem.bundle.scp.css
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.dll
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\refint\ClaimSystem.dll
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.pdb
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.genruntimeconfig.cache
+C:\Users\demos\OneDrive\Documents\Visual Studio 2022\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ref\ClaimSystem.dll
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\appsettings.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.staticwebassets.runtime.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.exe
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.deps.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.runtimeconfig.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.dll
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\bin\Debug\net8.0\ClaimSystem.pdb
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.AssemblyInfoInputs.cache
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.AssemblyInfo.cs
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.csproj.CoreCompileInputs.cache
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.RazorAssemblyInfo.cache
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.RazorAssemblyInfo.cs
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.sourcelink.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets\msbuild.ClaimSystem.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets\msbuild.build.ClaimSystem.props
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ClaimSystem.props
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ClaimSystem.props
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\scopedcss\bundle\ClaimSystem.styles.css
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\scopedcss\projectbundle\ClaimSystem.bundle.scp.css
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.dll
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\refint\ClaimSystem.dll
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.pdb
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ClaimSystem.genruntimeconfig.cache
+C:\Users\demos\OneDrive\Documents\GitHub\PROG6212-POE-Part2\ClaimSystem(MVC)\ClaimSystem\obj\Debug\net8.0\ref\ClaimSystem.dll

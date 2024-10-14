@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ClaimSystem.Models.Claim>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use the app wide layout
+    ViewData["Title"] = "Claim Approval";  // Page title
+}
+
+<div class="container mt-5">
+    <h2>Claim Approval</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Lecturer</th>
+                <th>Hours</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through claims in model - show detials details -->
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.ClaimID</td>
+                    <td>@claim.Lecturer</td>
+                    <td>@claim.Hours</td>
+                    <td>@claim.Status</td>
+                    <td>
+                        <!-- Buttons to approve / reject claim -->
+                        <a href="@Url.Action("ApproveClaim", "Home", new { id = claim.ClaimID })" class="btn btn-success" style="width: 200px; height: 40px;">Approve</a>
+                        <a href="@Url.Action("RejectClaim", "Home", new { id = claim.ClaimID })" class="btn btn-danger" style="width: 200px; height: 40px;">Reject</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
