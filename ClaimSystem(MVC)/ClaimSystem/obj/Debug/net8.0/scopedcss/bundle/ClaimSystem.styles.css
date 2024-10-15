@@ -47,3 +47,29 @@ button.accept-policy[b-i2mcz1xn4i] {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.progress-bar[b-i2mcz1xn4i] {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.progress[b-i2mcz1xn4i] {
+    height: 20px;
+    border-radius: 5px;
+}
+
+.progress-warning[b-i2mcz1xn4i] {
+    background-color: #f0ad4e; /* Pending */
+}
+
+.progress-success[b-i2mcz1xn4i] {
+    background-color: #4caf50; /* Approved */
+}
+
+.progress-danger[b-i2mcz1xn4i] {
+    background-color: #d9534f; /* Rejected */
+}
+
+

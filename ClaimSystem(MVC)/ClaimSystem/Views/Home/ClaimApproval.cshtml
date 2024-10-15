@@ -13,24 +13,27 @@
                 <th>Claim ID</th>
                 <th>Lecturer</th>
                 <th>Hours</th>
-                <th>Status</th>
+                <th>Hourly Rate</th>
                 <th>Document</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Loop through claims in model - show detials details -->
+            <!-- Loop through claims in model - show detials -->
             @foreach (var claim in Model)
             {
                 <tr>
                     <td>@claim.ClaimID</td>
                     <td>@claim.Lecturer</td>
                     <td>@claim.Hours</td>
-                    <td>@claim.Status</td>
+                    <td>@claim.HourlyRate</td>
                     <td>
                         @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
                         {
-                        <a href="@Url.Content("~/uploads/" + System.IO.Path.GetFileName(claim.SupportingDocumentPath))" target="_blank">View Document</a>
+                            <!-- Display original file name - visible only to managers -->
+                        <a href="@Url.Content("~/uploads/" + System.IO.Path.GetFileName(claim.SupportingDocumentPath))" target="_blank">
+                            @claim.OriginalFileName
+                        </a>
                         }
                         else
                         {

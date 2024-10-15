@@ -28,5 +28,8 @@ namespace ClaimSystem.Models
         // Path for the supporting document
         public string? SupportingDocumentPath { get; set; }  // Nullable - allows no file submission
 
+        // Original file name - seen by managers
+        public string? OriginalFileName { get; set; }  
+
     }
 }

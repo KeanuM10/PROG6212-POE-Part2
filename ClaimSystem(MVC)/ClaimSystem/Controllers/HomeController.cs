@@ -34,6 +34,7 @@ namespace ClaimSystem.Controllers
         {
             // Validate file upload
             string filePath = null;
+            string originalFileName = null;
 
             if (document != null && document.Length > 0)
             {
@@ -67,6 +68,7 @@ namespace ClaimSystem.Controllers
                 {
                     document.CopyTo(stream);
                 }
+                originalFileName = document.FileName;
             }
 
             // Create new claim based on submitted data
@@ -79,7 +81,8 @@ namespace ClaimSystem.Controllers
                 Notes = notes, // Notes added
                 Status = "Pending",
                 LastUpdated = System.DateTime.Now,
-                SupportingDocumentPath = filePath  // Store file path in claim
+                SupportingDocumentPath = filePath,  // Store file path in claim
+                OriginalFileName = originalFileName  // Store original file name
             };
 
             // Add new claim to list

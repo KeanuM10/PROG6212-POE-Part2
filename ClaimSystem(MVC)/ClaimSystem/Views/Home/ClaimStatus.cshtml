@@ -5,50 +5,62 @@
     ViewData["Title"] = "Claim Status";  // Set page title
 }
 
-                      <div class="container mt-5">
-                          <h2>Claim Status</h2>
-                          <table class="table table-bordered">
-                              <thead>
-                                  <tr>
-                                      <th>Claim ID</th>
-                                      <th>Lecturer</th>
-                                      <th>Hours</th>
-                                      <th>Hourly Rate</th>
-                                      <th>Notes</th>
-                                      <th>Status</th>
-                                      <th>Last Updated</th>
-                                      <th>Document</th> <!-- Document column -->
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <!-- Loop through claims - display status -->
-                                  @foreach (var claim in Model)
+<div class="container mt-5">
+    <h2>Claim Status</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Lecturer</th>
+                <th>Hours</th>
+                <th>Hourly Rate</th>
+                <th>Notes</th>
+                <th>Status</th>
+                <th>Last Updated</th>
+                <th>Document</th> <!-- Document column -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through claims - display status -->
+            @foreach (var claim in Model)
             {
-                                  <tr>
-                                      <td>@claim.ClaimID</td>
-                                      <td>@claim.Lecturer</td>
-                                      <td>@claim.Hours</td>
-                                      <td>@claim.HourlyRate</td> <!-- Hourly Rate and Notes added -->
-                                      <td>@claim.Notes</td>
-                                      <td>@claim.Status</td>
-                                      <td>@claim.LastUpdated.ToString("g")</td>
-                                      <td>
-                                          @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
+                <tr>
+                    <td>@claim.ClaimID</td>
+                    <td>@claim.Lecturer</td>
+                    <td>@claim.Hours</td>
+                    <td>@claim.HourlyRate</td> <!-- Hourly Rate and Notes added -->
+                    <td>@claim.Notes</td>
+                    <td>
+                        <!-- Status as label -->
+                        @if (claim.Status == "Pending")
                         {
-                                          <a href="/uploads/@System.IO.Path.GetFileName(claim.SupportingDocumentPath)" target="_blank">View Document</a>
-
+                            <span class="badge bg-warning">Pending</span>
+                        }
+                        else if (claim.Status == "Approved")
+                        {
+                            <span class="badge bg-success">Approved</span>
+                        }
+                        else if (claim.Status == "Rejected")
+                        {
+                            <span class="badge bg-danger">Rejected</span>
+                        }
+                    </td>
+                    <td>@claim.LastUpdated.ToString("g")</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
+                        {
+                            <span>Document Uploaded</span>
                         }
                         else
                         {
-                                          <span>No document</span>
+                            <span>No document</span>
                         }
-                                      </td>
-                                  </tr>
+                    </td>
+                </tr>
             }
-                              </tbody>
-                          </table>
+        </tbody>
+    </table>
 
-                          <!-- Redirect to Login page (For admins) -->
-                          <a href="@Url.Action("Login", "Home")" class="btn btn-primary mt-3">Go to Admin Login</a>
-
-                      </div>
+    <!-- Redirect to Login page (For admins) -->
+    <a href="@Url.Action("Login", "Home")" class="btn btn-primary mt-3">Go to Admin Login</a>
+</div>
