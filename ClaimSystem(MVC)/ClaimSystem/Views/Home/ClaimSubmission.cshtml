@@ -5,6 +5,10 @@
 
 <div class="container mt-5">
     <h2>Claim Submission</h2>
+
+    <!-- Display Validation Errors (Summary) -->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <!-- Form - submit the claim (Updated with hourly rate and notes)-->
     <form method="post" enctype="multipart/form-data" action="@Url.Action("SubmitClaim", "Home")">
         <!-- Form - lecturer can input name -->
@@ -30,7 +34,10 @@
         <div class="form-group">
             <label for="document">Supporting Document (PDF, DOCX, XLSX - Max 5MB):</label>
             <input type="file" id="document" name="document" class="form-control-file" accept=".pdf,.docx,.xlsx" />
+            <span class="text-danger">@ViewData.ModelState["document"]?.Errors.FirstOrDefault()?.ErrorMessage</span>
         </div>
+
+
         <!-- Submit button -->
         <div>
             <button type="submit" class="btn btn-success" style="width: 200px; height: 40px;">Submit Claim</button>

@@ -36,13 +36,14 @@ namespace ClaimSystem.Controllers
             string filePath = null;
             string originalFileName = null;
 
+            notes = string.IsNullOrWhiteSpace(notes) ? "No additional notes" : notes;
+
             if (document != null && document.Length > 0)
             {
                 // File size validation (limit: 5MB)
                 if (document.Length > 5 * 1024 * 1024)
                 {
-                    ModelState.AddModelError("File", "The file size cannot exceed 5MB.");
-                    return View("ClaimSubmission");
+                    ModelState.AddModelError("document", "The file size cannot exceed 5MB.");
                 }
 
                 // File type validation
@@ -51,11 +52,16 @@ namespace ClaimSystem.Controllers
 
                 if (!allowedExtensions.Contains(extension))
                 {
-                    ModelState.AddModelError("File", "Only .pdf, .docx, and .xlsx files are allowed.");
+                    ModelState.AddModelError("document", "Only .pdf, .docx, and .xlsx files are allowed.");
+                }
+
+                // If validation errors - return to form and display errors
+                if (!ModelState.IsValid)
+                {
                     return View("ClaimSubmission");
                 }
 
-                // Sav  file to server (in wwwroot/uploads)
+                // Save file to server (in wwwroot/uploads)
                 var uploadsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
                 if (!Directory.Exists(uploadsDirectory))
                 {
