@@ -17,7 +17,7 @@ namespace ClaimSystem.Models
         public decimal HourlyRate { get; set; }
 
         // Additional notes for claim
-        public string Notes { get; set; } = string.Empty;
+        public string? Notes { get; set; } = string.Empty;
 
         // Current claim status - (Pending, Approved, Rejected)
         public string Status { get; set; } = "Pending";  // Default - Pending

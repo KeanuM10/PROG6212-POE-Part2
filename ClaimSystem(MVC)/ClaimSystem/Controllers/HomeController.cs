@@ -36,46 +36,71 @@ namespace ClaimSystem.Controllers
             string filePath = null;
             string originalFileName = null;
 
-            notes = string.IsNullOrWhiteSpace(notes) ? "No additional notes" : notes;
+            // Manually remove empty notes and replace with "No additional notes"
+            if (ModelState.ContainsKey("notes") && string.IsNullOrWhiteSpace(notes))
+            {
+                ModelState.Remove("notes");
+                notes = "No additional notes";
+            }
 
             if (document != null && document.Length > 0)
             {
-                // File size validation (limit: 5MB)
-                if (document.Length > 5 * 1024 * 1024)
+                try
                 {
-                    ModelState.AddModelError("document", "The file size cannot exceed 5MB.");
+                    // File size validation (limit: 5MB)
+                    if (document.Length > 5 * 1024 * 1024)
+                    {
+                        ModelState.AddModelError("document", "The file size cannot exceed 5MB.");
+                    }
+
+                    // File type validation
+                    var allowedExtensions = new[] { ".pdf", ".docx", ".xlsx" };
+                    var extension = Path.GetExtension(document.FileName).ToLowerInvariant();
+
+                    if (!allowedExtensions.Contains(extension))
+                    {
+                        ModelState.AddModelError("document", "Only .pdf, .docx, and .xlsx files are allowed.");
+                    }
+
+                    // If validation errors - return to form and display errors
+                    if (!ModelState.IsValid)
+                    {
+                        foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            System.Diagnostics.Debug.WriteLine($"ModelState Error: {error.ErrorMessage}");
+                        }
+                        return View("ClaimSubmission");
+                    }
+
+                    // Save file to server (in wwwroot/uploads)
+                    var uploadsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                    if (!Directory.Exists(uploadsDirectory))
+                    {
+                        Directory.CreateDirectory(uploadsDirectory);
+                    }
+
+                    var uniqueFileName = Path.GetRandomFileName() + extension;
+                    filePath = Path.Combine(uploadsDirectory, uniqueFileName);
+
+                    // Debug statement for file path
+                    System.Diagnostics.Debug.WriteLine($"Saving file to: {filePath}");
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        document.CopyTo(stream);
+                    }
+
+                    originalFileName = document.FileName;
                 }
-
-                // File type validation
-                var allowedExtensions = new[] { ".pdf", ".docx", ".xlsx" };
-                var extension = Path.GetExtension(document.FileName).ToLowerInvariant();
-
-                if (!allowedExtensions.Contains(extension))
+                catch (Exception ex)
                 {
-                    ModelState.AddModelError("document", "Only .pdf, .docx, and .xlsx files are allowed.");
-                }
-
-                // If validation errors - return to form and display errors
-                if (!ModelState.IsValid)
-                {
+                    // Log exception details
+                    System.Diagnostics.Debug.WriteLine($"Error saving file: {ex.Message}");
+                    ModelState.AddModelError("document", "An error occurred while saving the file.");
                     return View("ClaimSubmission");
                 }
-
-                // Save file to server (in wwwroot/uploads)
-                var uploadsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
-                if (!Directory.Exists(uploadsDirectory))
-                {
-                    Directory.CreateDirectory(uploadsDirectory);
-                }
-
-                var uniqueFileName = Path.GetRandomFileName() + extension;
-                filePath = Path.Combine(uploadsDirectory, uniqueFileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    document.CopyTo(stream);
-                }
-                originalFileName = document.FileName;
             }
+
 
             // Create new claim based on submitted data
             var newClaim = new Claim
