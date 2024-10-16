@@ -96,7 +96,7 @@ namespace ClaimSystem.Controllers
                 {
                     // Log exception details
                     System.Diagnostics.Debug.WriteLine($"Error saving file: {ex.Message}");
-                    ModelState.AddModelError("document", "An error occurred while saving the file.");
+                    ModelState.AddModelError("", "An unexpected error occurred. Please try again.");
                     return View("ClaimSubmission");
                 }
             }
@@ -214,5 +214,28 @@ namespace ClaimSystem.Controllers
         {
             return View(new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        private void LogErrorToFile(string message)
+        {
+            var logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Logs", "error.log");
+            var logDirectory = Path.GetDirectoryName(logFilePath);
+            if (!Directory.Exists(logDirectory))
+            {
+                Directory.CreateDirectory(logDirectory);
+            }
+
+            using (var writer = new StreamWriter(logFilePath, true))
+            {
+                writer.WriteLine($"{DateTime.Now}: {message}");
+            }
+        }
+
+        public IActionResult StatusCode(int code)
+        {
+            ViewBag.StatusCode = code;
+            return View();
+        }
+
+
     }
 }

@@ -1,0 +1,10 @@
+@{
+    ViewData["Title"] = "Error";
+    var statusCode = ViewBag.StatusCode as int?;
+}
+
+<div class="container mt-5">
+    <h1 class="text-danger">Error @statusCode</h1>
+    <p>The requested resource could not be found.</p>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary mt-3">Back to Home</a>
+</div>

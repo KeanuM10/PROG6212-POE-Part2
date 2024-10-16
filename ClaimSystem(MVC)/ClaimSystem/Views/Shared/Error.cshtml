@@ -4,10 +4,14 @@
     ViewData["Title"] = "Error";
 }
 
-<h1 class="text-danger">An error occurred while processing your request.</h1>
-@if (Model.ShowRequestId)
-{
+<div class="container mt-5">
+    <h1 class="text-danger">Oops! Something went wrong.</h1>
+    <p>An unexpected error occurred. Please try again later.</p>
+    @if (Model.ShowRequestId)
+    {
     <p>
         <strong>Request ID:</strong> <code>@Model.RequestId</code>
     </p>
-}
+    }
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary mt-3">Back to Home</a>
+</div>

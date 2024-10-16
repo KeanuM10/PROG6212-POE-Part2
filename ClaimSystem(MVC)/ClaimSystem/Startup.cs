@@ -42,6 +42,8 @@ namespace ClaimSystem
             app.UseStaticFiles();  
 
             app.UseRouting();
+            app.UseStatusCodePagesWithReExecute("/Home/StatusCode", "?code={0}");
+
             app.UseSession(); // Use session
             app.UseAuthorization();  
 
