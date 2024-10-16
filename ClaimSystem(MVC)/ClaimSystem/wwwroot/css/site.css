@@ -1,22 +1,68 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* General page styles */
 body {
-  margin-bottom: 60px;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Navigation bar styling */
+.navbar-dark .navbar-brand {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+/* Container styling */
+.container {
+    max-width: 900px;
+}
+
+/* Footer styling */
+.footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 15px 0;
+}
+
+/* Button styles */
+.btn-primary, .btn-success, .btn-danger {
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Table styles */
+.table {
+    border: 1px solid #dee2e6;
+}
+
+    .table thead th {
+        background-color: #343a40;
+        color: #ffffff;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+/* Form control styling */
+.form-control {
+    border-radius: 5px;
+}
+
+/* Badge styling for claim status */
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #000;
+}
+
+.badge.bg-success {
+    background-color: #28a745 !important;
+    color: #fff;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+    color: #fff;
 }

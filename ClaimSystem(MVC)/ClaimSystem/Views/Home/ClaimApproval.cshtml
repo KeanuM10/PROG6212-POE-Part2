@@ -15,6 +15,7 @@
                 <th>Hours</th>
                 <th>Hourly Rate</th>
                 <th>Document</th>
+                <th>Notes</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -40,6 +41,7 @@
                         <span>No document</span>
                         }
                     </td>
+                    <td>@claim.Notes</td>
                     <td>
                         <!-- Buttons to approve / reject claim -->
                         <a href="@Url.Action("ApproveClaim", "Home", new { id = claim.ClaimID })" class="btn btn-success" style="width: 200px; height: 40px;">Approve</a>
