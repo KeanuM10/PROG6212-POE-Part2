@@ -10,7 +10,7 @@ namespace ClaimSystem.Controllers
     public class HomeController : Controller
     {
         // Static list of claims to acts as database storage
-        private static List<Claim> _claims = new()
+        public static List<Claim> _claims = new()
         {
             new Claim { ClaimID = 1, Lecturer = "John Doe", Hours = 20, HourlyRate = 100, Notes = "Prog class", Status = "Pending", LastUpdated = System.DateTime.Now },
             new Claim { ClaimID = 2, Lecturer = "Jane Smith", Hours = 15, HourlyRate = 150, Notes = "Tutoring services", Status = "Pending", LastUpdated = System.DateTime.Now }

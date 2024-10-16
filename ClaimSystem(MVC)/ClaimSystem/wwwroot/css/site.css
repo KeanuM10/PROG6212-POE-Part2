@@ -66,3 +66,48 @@ body {
     background-color: #dc3545 !important;
     color: #fff;
 }
+/* Custom form styles */
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Custom button styles */
+.btn-custom {
+    background-color: #28a745;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+    .btn-custom:hover {
+        background-color: #218838;
+    }
+
+/* Table styles */
+.table-custom {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+    .table-custom thead th {
+        background-color: #343a40;
+        color: #ffffff;
+    }
+
+    .table-custom tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+/* Custom footer styling */
+.footer-custom {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
