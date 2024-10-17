@@ -18,6 +18,12 @@
     </form>
     @if (ViewBag.ErrorMessage != null)
     {
-    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+        <div class="alert alert-danger mt-3">@ViewBag.ErrorMessage</div>
     }
+    <p class="mt-3">Use the following credentials for testing:</p>
+    <ul>
+        <li><strong>Lecturer:</strong> username: lecturer, password: 123</li>
+        <li><strong>Coordinator:</strong> username: coordinator, password: 123</li>
+        <li><strong>Manager:</strong> username: manager, password: 123</li>
+    </ul>
 </div>

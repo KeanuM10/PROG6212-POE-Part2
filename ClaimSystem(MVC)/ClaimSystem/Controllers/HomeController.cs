@@ -25,6 +25,11 @@ namespace ClaimSystem.Controllers
         // ClaimSubmission action - displays claim submission form
         public IActionResult ClaimSubmission()
         {
+            // Only allow access if the user is logged in as a Lecturer
+            if (HttpContext.Session.GetString("UserRole") != "Lecturer")
+            {
+                return RedirectToAction("Login");
+            }
             return View();
         }
 
@@ -134,14 +139,25 @@ namespace ClaimSystem.Controllers
         public IActionResult Login(string username, string password)
         {
             // Role login
-            if (username == "coordinator" && password == "123")
+            if (username == "lecturer" && password == "123")
             {
+                // Set user role to Lecturer
+                HttpContext.Session.SetString("UserRole", "Lecturer");
+                // Redirect to ClaimSubmission
+                return RedirectToAction("ClaimSubmission");
+            }
+            else if (username == "coordinator" && password == "123")
+            {
+                // Set user role to Coordinator
                 HttpContext.Session.SetString("UserRole", "Coordinator");
+                // Redirect to ClaimApproval
                 return RedirectToAction("ClaimApproval");
             }
             else if (username == "manager" && password == "123")
             {
+                // Set user role to Manager
                 HttpContext.Session.SetString("UserRole", "Manager");
+                // Redirect to ClaimApproval
                 return RedirectToAction("ClaimApproval");
             }
             else
@@ -161,8 +177,9 @@ namespace ClaimSystem.Controllers
         // ClaimApproval action - shows pending claims for approval / rejection
         public IActionResult ClaimApproval()
         {
-            // Filter and give only pending claims
-            if (HttpContext.Session.GetString("UserRole") == null)
+            // Only allow access if the user is logged in as a Coordinator or Manager
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Coordinator" && userRole != "Manager")
             {
                 return RedirectToAction("Login");
             }
@@ -205,6 +222,12 @@ namespace ClaimSystem.Controllers
         // ClaimStatus action - displays status of submitted claims
         public IActionResult ClaimStatus()
         {
+            // Ensure that a user is logged in
+            if (HttpContext.Session.GetString("UserRole") == null)
+            {
+                return RedirectToAction("Login");
+            }
+
             // Pass list of claims to view
             return View(_claims);
         }

@@ -9,10 +9,10 @@
     <style>
         /* Custom styles */
         .navbar-custom {
-            background-color: #343a40;
+            background-color: #1182a8;
         }
         .footer-custom {
-            background-color: #343a40;
+            background-color: #1182a8;
             color: #ffffff;
             padding: 15px 0;
             text-align: center;
@@ -31,17 +31,29 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
+                    @if (Context.Session.GetString("UserRole") == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Login", "Home")">Login</a>
+                        </li>
+                    }
+                    else if (Context.Session.GetString("UserRole") == "Lecturer")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ClaimSubmission", "Home")">Submit Claim</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ClaimStatus", "Home")">Claim Status</a>
+                        </li>
+                    }
+                    else if (Context.Session.GetString("UserRole") == "Coordinator" || Context.Session.GetString("UserRole") == "Manager")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ClaimApproval", "Home")">Claim Approval</a>
+                        </li>
+                    }
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("ClaimSubmission", "Home")">Submit Claim</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("ClaimStatus", "Home")">Claim Status</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Login", "Home")">Login</a>
+                        <a class="nav-link" href="@Url.Action("Logout", "Home")">Logout</a>
                     </li>
                 </ul>
             </div>

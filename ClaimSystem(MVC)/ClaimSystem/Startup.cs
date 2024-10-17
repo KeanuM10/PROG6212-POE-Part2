@@ -13,7 +13,12 @@ namespace ClaimSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSession(); // Enable session
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+                options.Cookie.HttpOnly = true; // Make the cookie HTTP only
+                options.Cookie.IsEssential = true; // Essential cookie
+            });
         }
 
         // Method to configure 
