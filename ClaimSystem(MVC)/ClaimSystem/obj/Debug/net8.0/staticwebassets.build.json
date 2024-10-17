@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "E0DcwYnezopqyuYsk9+xRQJgu2GTIWLBOUm4XPBkbu0=",
+  "Hash": "DDmP2Ygxcl7/nplJ4jjA2sYOt1tSfNf+f4kbxC3XQ3s=",
   "Source": "ClaimSystem",
   "BasePath": "_content/ClaimSystem",
   "Mode": "Default",
@@ -1193,25 +1193,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
-    },
-    {
-      "Identity": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\wwwroot\\uploads\\mv44pkc2.iew.docx",
-      "SourceId": "ClaimSystem",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\wwwroot\\",
-      "BasePath": "_content/ClaimSystem",
-      "RelativePath": "uploads/mv44pkc2.iew.docx",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\mv44pkc2.iew.docx"
     }
   ]
 }
