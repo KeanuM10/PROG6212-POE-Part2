@@ -1,0 +1,163 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem.Tests\\ClaimSystem.Tests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem.Tests\\ClaimSystem.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem.Tests\\ClaimSystem.Tests.csproj",
+        "projectName": "ClaimSystem.Tests",
+        "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem.Tests\\ClaimSystem.Tests.csproj",
+        "packagesPath": "C:\\Users\\demos\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\demos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\ClaimSystem.csproj": {
+                "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\ClaimSystem.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.8.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.9.2, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\ClaimSystem.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\ClaimSystem.csproj",
+        "projectName": "ClaimSystem",
+        "projectPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\ClaimSystem.csproj",
+        "packagesPath": "C:\\Users\\demos\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\demos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.72, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.9.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

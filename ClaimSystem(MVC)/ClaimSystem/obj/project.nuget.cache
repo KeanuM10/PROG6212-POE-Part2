@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Y23F1vumn6pA4qE8A7gP8UMoktZJRzDairN6iKwznV3P4tkYU76Jc5zu+OFMXFkD1wkDtvG4VV/2CNxjCm/XOQ==",
+  "dgSpecHash": "xR3HHAqH6A8f0ejwjIrEd1QVTpweWTY2N+WjTT/ZYsInSeQ/O3P2h0U64cELaF3EQIdLm4w9RQ2hKbZT5ECjJw==",
   "success": true,
   "projectFilePath": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\ClaimSystem.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\demos\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
+    "C:\\Users\\demos\\.nuget\\packages\\moq\\4.20.72\\moq.4.20.72.nupkg.sha512",
+    "C:\\Users\\demos\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "C:\\Users\\demos\\.nuget\\packages\\xunit\\2.9.2\\xunit.2.9.2.nupkg.sha512",
     "C:\\Users\\demos\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
     "C:\\Users\\demos\\.nuget\\packages\\xunit.analyzers\\1.16.0\\xunit.analyzers.1.16.0.nupkg.sha512",
