@@ -7,18 +7,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
+        /* Flexbox styling for sticky footer */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .content-wrapper {
+            flex: 1;
+        }
         /* Custom styles */
         .navbar-custom {
             background-color: #1182a8;
         }
+
         .footer-custom {
             background-color: #1182a8;
             color: #ffffff;
             padding: 15px 0;
             text-align: center;
-            position: fixed;
             width: 100%;
-            bottom: 0;
         }
     </style>
 </head>
@@ -60,7 +70,7 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container content-wrapper mt-4">
         @RenderBody()
     </div>
 

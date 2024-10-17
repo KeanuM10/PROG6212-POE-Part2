@@ -37,6 +37,21 @@ namespace ClaimSystem.Controllers
         [HttpPost]
         public IActionResult SubmitClaim(string lecturer, decimal hoursWorked, decimal hourlyRate, string notes, IFormFile document)
         {
+            if (string.IsNullOrEmpty(lecturer))
+            {
+                ModelState.AddModelError("lecturer", "Lecturer name is required.");
+            }
+
+            if (hoursWorked <= 0)
+            {
+                ModelState.AddModelError("hoursWorked", "Hours worked must be greater than zero.");
+            }
+
+            if (hourlyRate <= 0)
+            {
+                ModelState.AddModelError("hourlyRate", "Hourly rate must be greater than zero.");
+            }
+
             // Validate file upload
             string filePath = null;
             string originalFileName = null;
@@ -258,7 +273,5 @@ namespace ClaimSystem.Controllers
             ViewBag.StatusCode = code;
             return View();
         }
-
-
     }
 }
