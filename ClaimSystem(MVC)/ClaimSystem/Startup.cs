@@ -4,21 +4,41 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using ClaimSystem.Models;
+using Microsoft.EntityFrameworkCore;
+using ClaimSystem.Data;
+
 
 namespace ClaimSystem
 {
     public class Startup
     {
-        // Method to configure
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            // Existing ConfigureServices code
             services.AddControllersWithViews();
+
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
-                options.Cookie.HttpOnly = true; // Make the cookie HTTP only
-                options.Cookie.IsEssential = true; // Essential cookie
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
+
+            // Add MySQL database context
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseMySql(
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    new MySqlServerVersion(new Version(8, 0, 2))
+                )
+            );
         }
 
         // Method to configure 

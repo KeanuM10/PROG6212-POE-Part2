@@ -44,7 +44,7 @@ namespace ClaimSystem.Controllers
 
             if (hoursWorked <= 0)
             {
-                ModelState.AddModelError("hoursWorked", "Hours worked must be greater than zero.");
+                ModelState.AddModelError("hoursWorked", "Hours worked must be greater than zero and a valid number");
             }
 
             if (hourlyRate <= 0)
@@ -137,7 +137,14 @@ namespace ClaimSystem.Controllers
             };
 
             // Add new claim to list
-            _claims.Add(newClaim);
+            if (hoursWorked <= 0)
+            {
+                ModelState.AddModelError("hoursWorked", "Hours worked must be greater than zero and a valid number");
+            } else
+            {
+                _claims.Add(newClaim);
+            }
+            
 
             // Redirect to ClaimStatus action after a submission
             return RedirectToAction("ClaimStatus");

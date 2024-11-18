@@ -1,35 +1,32 @@
-using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClaimSystem.Models
 {
     public class Claim
     {
-        // Unique ID for claims
+        [Key]
         public int ClaimID { get; set; }
 
-        // Lecturer name - submitting claim
-        public string Lecturer { get; set; } = string.Empty;  // Initialize as empty - avoid null problems
+        [Required]
+        public string Lecturer { get; set; } = string.Empty;
 
-        // Hours worked (int)
+        [Required]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Hours worked must be greater than zero.")]
         public decimal Hours { get; set; }
 
-        // Hourly rate for claim
+        [Required]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Hourly rate must be greater than zero.")]
         public decimal HourlyRate { get; set; }
 
-        // Additional notes for claim
         public string? Notes { get; set; } = string.Empty;
 
-        // Current claim status - (Pending, Approved, Rejected)
-        public string Status { get; set; } = "Pending";  // Default - Pending
+        [Required]
+        public string Status { get; set; } = "Pending";
 
-        // Timestamp for last update for claim
         public DateTime LastUpdated { get; set; } = DateTime.Now;
 
-        // Path for the supporting document
-        public string? SupportingDocumentPath { get; set; }  // Nullable - allows no file submission
+        public string? SupportingDocumentPath { get; set; }
 
-        // Original file name - seen by managers
-        public string? OriginalFileName { get; set; }  
-
+        public string? OriginalFileName { get; set; }
     }
 }
