@@ -30,5 +30,11 @@ namespace ClaimSystem.Models
         public string? SupportingDocumentPath { get; set; }
 
         public string? OriginalFileName { get; set; }
+
+        public string? AutoStatus { get; set; } // Auto Approved or Auto Rejected
+        public string? OverriddenStatus { get; set; } // Approved or Rejected by admin
+        public string? OverriddenBy { get; set; } // Admin who overrode the decision
+        public string? ReasonForOverride { get; set; } // Reason provided by admin
+
     }
 }

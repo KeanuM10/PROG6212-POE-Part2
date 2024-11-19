@@ -108,6 +108,20 @@ namespace ClaimSystem.Controllers
                 OriginalFileName = originalFileName
             };
 
+            // Automated validation
+            var validationResult = ValidateClaim(newClaim);
+
+            if (validationResult.StartsWith("Rejected"))
+            {
+                newClaim.AutoStatus = "Auto Rejected";
+                newClaim.Status = "Rejected"; // Set status to Rejected
+            }
+            else
+            {
+                newClaim.AutoStatus = "Auto Approved";
+                newClaim.Status = "Approved"; // Set status to Approved
+            }
+
             _context.Claims.Add(newClaim);
             _context.SaveChanges();
 
@@ -135,7 +149,7 @@ namespace ClaimSystem.Controllers
                 return RedirectToAction("Login");
             }
 
-            var claims = _context.Claims.Where(c => c.Status == "Pending").ToList();
+            var claims = _context.Claims.ToList();
             return View(claims);
         }
 
@@ -197,6 +211,54 @@ namespace ClaimSystem.Controllers
                 return View();
             }
         }
+
+        private string ValidateClaim(Claim claim)
+        {
+            // Example rules
+            if (claim.Hours > 80)
+            {
+                return "Rejected: Exceeds maximum hours allowed (80).";
+            }
+
+            if (claim.HourlyRate < 10 || claim.HourlyRate > 100)
+            {
+                return "Rejected: Hourly rate is out of the allowed range (R10-R100).";
+            }
+
+            if (claim.TotalPayment > 8000)
+            {
+                return "Rejected: Total payment exceeds the R8,000 threshold.";
+            }
+
+            return "Approved";
+        }
+
+        [HttpPost]
+        public IActionResult OverrideDecision(int id, string action)
+        {
+            var claim = _context.Claims.FirstOrDefault(c => c.ClaimID == id);
+            if (claim == null)
+            {
+                return NotFound();
+            }
+
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Coordinator" && userRole != "Manager")
+            {
+                return Unauthorized();
+            }
+
+            // Update the claim status based on the action
+            claim.OverriddenStatus = action == "Approve" ? "Approved" : "Rejected";
+            claim.OverriddenBy = userRole;
+            claim.Status = claim.OverriddenStatus; // Update claim status
+            claim.LastUpdated = DateTime.Now;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("ClaimApproval");
+        }
+
 
         public IActionResult Logout()
         {

@@ -16,7 +16,8 @@
                 <th>Total Payment</th>
                 <th>Document</th>
                 <th>Notes</th>
-                <th>Actions</th>
+                <th>Auto Status</th>
+                <th>Override</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                     <td>@claim.Hours.ToString("F2")</td>
                     <td>@claim.HourlyRate.ToString("F2")</td>
                     <td>@claim.TotalPayment.ToString("F2")</td>
+
                     <td>
                         @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
                         {
@@ -42,13 +44,74 @@
                         }
                     </td>
                     <td>@claim.Notes</td>
+
                     <td>
-                        <!-- Buttons to approve / reject claim -->
-                        <a href="@Url.Action("ApproveClaim", "Home", new { id = claim.ClaimID })" class="btn btn-success" style="width: 200px; height: 40px;">Approve</a>
-                        <a href="@Url.Action("RejectClaim", "Home", new { id = claim.ClaimID })" class="btn btn-danger" style="width: 200px; height: 40px;">Reject</a>
+                        @if (!string.IsNullOrEmpty(claim.OverriddenStatus))
+                        {
+                            <span class="badge bg-primary">Overridden: @claim.OverriddenStatus</span>
+                        }
+                        else if (!string.IsNullOrEmpty(claim.AutoStatus))
+                        {
+                            <span class="badge bg-secondary">@claim.AutoStatus</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning">Pending Validation</span>
+                        }
                     </td>
+
+                    <td>
+                        <form method="post" action="@Url.Action("OverrideDecision", "Home")">
+                            <input type="hidden" name="id" value="@claim.ClaimID" />
+                            <input type="hidden" name="action" value="Approve" />
+                            <button class="btn btn-success btn-sm">Approve</button>
+                        </form>
+                        <form method="post" action="@Url.Action("OverrideDecision", "Home")">
+                            <input type="hidden" name="id" value="@claim.ClaimID" />
+                            <input type="hidden" name="action" value="Reject" />
+                            <button class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    </td>
+
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+<!-- Modal for adding override reason -->
+<div class="modal fade" id="overrideModal" tabindex="-1" role="dialog" aria-labelledby="overrideModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="overrideModalLabel">Override Decision</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="@Url.Action("OverrideDecision", "Home")">
+                <div class="modal-body">
+                    <input type="hidden" id="claimId" name="id" />
+                    <input type="hidden" id="overrideAction" name="action" />
+                    <div class="form-group">
+                        <label for="reason">Reason for Override:</label>
+                        <textarea id="reason" name="reason" class="form-control" placeholder="Enter reason for override" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit Override</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openOverrideModal(claimId, action) {
+        document.getElementById("claimId").value = claimId;
+        document.getElementById("overrideAction").value = action;
+        $('#overrideModal').modal('show');
+    }
+</script>
+
