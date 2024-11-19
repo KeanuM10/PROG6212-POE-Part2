@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rRc0pc51/d7p51ltYc44kQ+6I7HkhyADiSu1Uw3DJCI=",
+  "Hash": "9Jjlmx/ewqA8JoLmTanEufW3Xe8BBzl/bmQ3VZPHwkk=",
   "Source": "ClaimSystem",
   "BasePath": "_content/ClaimSystem",
   "Mode": "Default",
@@ -1440,6 +1440,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\uzmzmnfs.ue3.docx"
+    },
+    {
+      "Identity": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\wwwroot\\uploads\\xblxhemn.p0v.docx",
+      "SourceId": "ClaimSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\wwwroot\\",
+      "BasePath": "_content/ClaimSystem",
+      "RelativePath": "uploads/xblxhemn.p0v.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\xblxhemn.p0v.docx"
     }
   ]
 }

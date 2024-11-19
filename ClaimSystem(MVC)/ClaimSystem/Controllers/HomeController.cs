@@ -5,6 +5,9 @@ using System;
 using System.IO;
 using System.Linq;
 using ClaimSystem.Data;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using BCrypt.Net;
 
 namespace ClaimSystem.Controllers
 {
@@ -187,32 +190,31 @@ namespace ClaimSystem.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Login(string username, string password)
+    [HttpPost]
+    public IActionResult Login(string username, string password)
+    {
+        // Fetch user from the database
+        var user = _context.Users.FirstOrDefault(u => u.Username == username);
+
+        if (user != null && BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
         {
-            if (username == "lecturer" && password == "123")
+            HttpContext.Session.SetString("UserRole", user.Role);
+            if (user.Role == "Lecturer")
             {
-                HttpContext.Session.SetString("UserRole", "Lecturer");
                 return RedirectToAction("ClaimSubmission");
             }
-            else if (username == "coordinator" && password == "123")
+            else if (user.Role == "Manager" || user.Role == "Coordinator")
             {
-                HttpContext.Session.SetString("UserRole", "Coordinator");
                 return RedirectToAction("ClaimApproval");
-            }
-            else if (username == "manager" && password == "123")
-            {
-                HttpContext.Session.SetString("UserRole", "Manager");
-                return RedirectToAction("ClaimApproval");
-            }
-            else
-            {
-                ViewBag.ErrorMessage = "Invalid username or password.";
-                return View();
             }
         }
 
-        private string ValidateClaim(Claim claim)
+        ViewBag.ErrorMessage = "Invalid username or password.";
+        return View();
+    }
+
+
+    private string ValidateClaim(Claim claim)
         {
             // Example rules
             if (claim.Hours > 80)
@@ -257,6 +259,74 @@ namespace ClaimSystem.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("ClaimApproval");
+        }
+
+        public IActionResult GenerateReport()
+        {
+            // Fetch approved claims and summary data
+            var approvedClaims = _context.Claims
+                .Where(c => c.Status == "Approved")
+                .ToList();
+
+            int totalClaims = _context.Claims.Count();
+            int totalApproved = approvedClaims.Count;
+            int totalRejected = _context.Claims.Count(c => c.Status == "Rejected");
+            decimal totalApprovedPayments = approvedClaims.Sum(c => c.TotalPayment);
+            decimal totalApprovedHours = approvedClaims.Sum(c => c.Hours);
+
+            // Generate the PDF
+            using (var stream = new MemoryStream())
+            {
+                var document = new Document();
+                PdfWriter.GetInstance(document, stream);
+                document.Open();
+
+                // Title
+                var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16);
+                document.Add(new Paragraph("Approved Claims Report", titleFont));
+                document.Add(new Paragraph($"Generated on: {DateTime.Now:dd MMM yyyy HH:mm}\n\n"));
+
+                // Summary Section
+                var summaryFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
+                document.Add(new Paragraph($"Total Claims Submitted: {totalClaims}", summaryFont));
+                document.Add(new Paragraph($"Total Claims Approved: {totalApproved}", summaryFont));
+                document.Add(new Paragraph($"Total Claims Rejected: {totalRejected}", summaryFont));
+                document.Add(new Paragraph($"Total Payment for Approved Claims: R{totalApprovedPayments:F2}", summaryFont));
+                document.Add(new Paragraph($"Total Hours for Approved Claims: {totalApprovedHours:F2}\n\n", summaryFont));
+
+                // Approved Claims Details Table
+                var table = new PdfPTable(6);
+                table.WidthPercentage = 100;
+                table.SetWidths(new[] { 10f, 20f, 10f, 10f, 20f, 30f }); // Adjust widths as needed
+
+                // Table Headers
+                var headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
+                table.AddCell(new PdfPCell(new Phrase("Claim ID", headerFont)));
+                table.AddCell(new PdfPCell(new Phrase("Lecturer", headerFont)));
+                table.AddCell(new PdfPCell(new Phrase("Hours", headerFont)));
+                table.AddCell(new PdfPCell(new Phrase("Total Payment", headerFont)));
+                table.AddCell(new PdfPCell(new Phrase("Last Updated", headerFont)));
+                table.AddCell(new PdfPCell(new Phrase("Notes", headerFont)));
+
+                // Table Data
+                var cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 9);
+                foreach (var claim in approvedClaims)
+                {
+                    table.AddCell(new PdfPCell(new Phrase(claim.ClaimID.ToString(), cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(claim.Lecturer, cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(claim.Hours.ToString("F2"), cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase($"R{claim.TotalPayment:F2}", cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(claim.LastUpdated.ToString("dd MMM yyyy"), cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(claim.Notes, cellFont)));
+                }
+
+                // Add the table to the document
+                document.Add(table);
+
+                document.Close();
+
+                return File(stream.ToArray(), "application/pdf", "ApprovedClaimsReport.pdf");
+            }
         }
 
 

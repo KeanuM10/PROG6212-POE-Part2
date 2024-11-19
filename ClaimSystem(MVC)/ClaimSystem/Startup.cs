@@ -79,6 +79,28 @@ namespace ClaimSystem
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");  // Way to Home controllers Index (action)
             });
+
+            SeedUsers(app.ApplicationServices.GetRequiredService<ApplicationDbContext>());
+
         }
+
+        private void SeedUsers(ApplicationDbContext context)
+        {
+            if (!context.Users.Any())
+            {
+                var users = new List<User>
+        {
+            new User { Username = "lecturer1", PasswordHash = BCrypt.Net.BCrypt.HashPassword("lecturer1pass"), Role = "Lecturer" },
+            new User { Username = "lecturer2", PasswordHash = BCrypt.Net.BCrypt.HashPassword("lecturer2pass"), Role = "Lecturer" },
+            new User { Username = "lecturer3", PasswordHash = BCrypt.Net.BCrypt.HashPassword("lecturer3pass"), Role = "Lecturer" },
+            new User { Username = "manager", PasswordHash = BCrypt.Net.BCrypt.HashPassword("managerpass"), Role = "Manager" },
+            new User { Username = "coordinator", PasswordHash = BCrypt.Net.BCrypt.HashPassword("coordinatorpass"), Role = "Coordinator" }
+        };
+
+                context.Users.AddRange(users);
+                context.SaveChanges();
+            }
+        }
+
     }
 }

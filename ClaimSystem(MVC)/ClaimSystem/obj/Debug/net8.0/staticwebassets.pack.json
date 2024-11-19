@@ -297,6 +297,10 @@
       "PackagePath": "staticwebassets\\uploads\\uzmzmnfs.ue3.docx"
     },
     {
+      "Id": "C:\\Users\\demos\\OneDrive\\Documents\\GitHub\\PROG6212-POE-Part2\\ClaimSystem(MVC)\\ClaimSystem\\wwwroot\\uploads\\xblxhemn.p0v.docx",
+      "PackagePath": "staticwebassets\\uploads\\xblxhemn.p0v.docx"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ClaimSystem.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

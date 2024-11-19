@@ -11,5 +11,6 @@ namespace ClaimSystem.Data
         }
 
         public DbSet<Claim> Claims { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
