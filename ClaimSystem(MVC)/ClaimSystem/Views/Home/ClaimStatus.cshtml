@@ -11,9 +11,9 @@
         <thead>
             <tr>
                 <th>Claim ID</th>
-                <th>Lecturer</th>
                 <th>Hours</th>
                 <th>Hourly Rate</th>
+                <th>Total Payment</th>
                 <th>Notes</th>
                 <th>Status</th>
                 <th>Last Updated</th>
@@ -26,9 +26,9 @@
             {
                 <tr>
                     <td>@claim.ClaimID</td>
-                    <td>@claim.Lecturer</td>
-                    <td>@claim.Hours</td>
-                    <td>@claim.HourlyRate</td> <!-- Hourly Rate and Notes added -->
+                    <td>@claim.Hours.ToString("F2")</td>
+                    <td>@claim.HourlyRate.ToString("F2")</td> <!-- Hourly Rate and Notes added -->
+                    <td>@claim.TotalPayment.ToString("F2")</td>
                     <td>@claim.Notes</td>
                     <td>
                         <!-- Status as label -->

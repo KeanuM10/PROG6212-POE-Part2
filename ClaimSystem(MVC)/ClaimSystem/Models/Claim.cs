@@ -25,6 +25,8 @@ namespace ClaimSystem.Models
 
         public DateTime LastUpdated { get; set; } = DateTime.Now;
 
+        public decimal TotalPayment { get; set; }
+
         public string? SupportingDocumentPath { get; set; }
 
         public string? OriginalFileName { get; set; }

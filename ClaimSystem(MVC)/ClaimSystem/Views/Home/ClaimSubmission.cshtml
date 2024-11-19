@@ -11,11 +11,6 @@
 
     <!-- Form - submit the claim (Updated with hourly rate and notes)-->
     <form method="post" enctype="multipart/form-data" action="@Url.Action("SubmitClaim", "Home")">
-        <!-- Form - lecturer can input name -->
-        <div class="form-group">
-            <label for="lecturer">Lecturer Name:</label>
-            <input type="text" id="lecturer" name="lecturer" class="form-control" placeholder="Enter full name" required />
-        </div>
         <div class="form-group">
             <label for="hoursWorked">Hours Worked:</label>
             <input type="number" id="hoursWorked" name="hoursWorked" class="form-control" placeholder="Enter hours worked" step="0.01" required />
@@ -26,6 +21,13 @@
             <label for="hourlyRate">Hourly Rate:</label>
             <input type="number" id="hourlyRate" name="hourlyRate" class="form-control" placeholder="Enter hourly rate" step="0.01" required />
         </div>
+
+        <!-- Auto-Calculated Payment -->
+        <div class="form-group">
+            <label for="totalPayment">Total Payment:</label>
+            <input type="text" id="totalPayment" class="form-control" readonly />
+        </div>
+
         <div class="form-group">
             <label for="notes">Additional Notes:</label>
             <textarea id="notes" name="notes" class="form-control" placeholder="Add any additional notes here" rows="4"></textarea>
@@ -48,3 +50,23 @@
         <a href="@Url.Action("ClaimStatus", "Home")" class="btn btn-secondary mt-3" style="width: 200px; height: 40px;">Go to Claim Status</a>
     </div>
 </div>
+
+<script>
+    // Auto-calculation logic
+    document.addEventListener("DOMContentLoaded", function () {
+        const hoursWorkedInput = document.getElementById("hoursWorked");
+        const hourlyRateInput = document.getElementById("hourlyRate");
+        const totalPaymentInput = document.getElementById("totalPayment");
+
+        function calculateTotalPayment() {
+            const hoursWorked = parseFloat(hoursWorkedInput.value) || 0;
+            const hourlyRate = parseFloat(hourlyRateInput.value) || 0;
+            const totalPayment = hoursWorked * hourlyRate;
+            totalPaymentInput.value = totalPayment.toFixed(2); // Format to 2 decimal places
+        }
+
+        // Add event listeners to recalculate on input change
+        hoursWorkedInput.addEventListener("input", calculateTotalPayment);
+        hourlyRateInput.addEventListener("input", calculateTotalPayment);
+    });
+</script>

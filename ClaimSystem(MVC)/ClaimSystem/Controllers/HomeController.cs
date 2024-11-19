@@ -36,13 +36,8 @@ namespace ClaimSystem.Controllers
 
         // SubmitClaim action - handles POST requests to submit claims
         [HttpPost]
-        public IActionResult SubmitClaim(string lecturer, decimal hoursWorked, decimal hourlyRate, string notes, IFormFile document)
+        public IActionResult SubmitClaim(decimal hoursWorked, decimal hourlyRate, string notes, IFormFile document)
         {
-            if (string.IsNullOrEmpty(lecturer))
-            {
-                ModelState.AddModelError("lecturer", "Lecturer name is required.");
-            }
-
             if (hoursWorked <= 0)
             {
                 ModelState.AddModelError("hoursWorked", "Hours worked must be greater than zero.");
@@ -97,12 +92,15 @@ namespace ClaimSystem.Controllers
                 return View("ClaimSubmission");
             }
 
+            // Calculate total payment
+            decimal totalPayment = Math.Round(hoursWorked * hourlyRate, 2); ;
+
             // Save the claim to the database
             var newClaim = new Claim
             {
-                Lecturer = lecturer,
-                Hours = hoursWorked,
-                HourlyRate = hourlyRate,
+                Hours = Math.Round(hoursWorked, 2),
+                HourlyRate = Math.Round(hourlyRate, 2),
+                TotalPayment = totalPayment,
                 Notes = string.IsNullOrWhiteSpace(notes) ? "No additional notes" : notes,
                 Status = "Pending",
                 LastUpdated = DateTime.Now,
