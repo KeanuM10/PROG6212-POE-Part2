@@ -184,37 +184,55 @@ namespace ClaimSystem.Controllers
             return RedirectToAction("ClaimApproval");
         }
 
-        // Login action
         public IActionResult Login()
         {
             return View();
         }
 
-    [HttpPost]
-    public IActionResult Login(string username, string password)
-    {
-        // Fetch user from the database
-        var user = _context.Users.FirstOrDefault(u => u.Username == username);
-
-        if (user != null && BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
+        [HttpPost]
+        public IActionResult Login(string username, string password)
         {
+            Console.WriteLine($"Attempting login with Username: {username}, Password: {password}");
+
+            // Retrieve user from the database
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+
+            if (user == null)
+            {
+                Console.WriteLine("User not found.");
+                ViewBag.ErrorMessage = "Invalid username or password.";
+                return View();
+            }
+
+            Console.WriteLine($"User found. Role: {user.Role}, Password in DB: {user.Password}");
+
+            // Compare passwords
+            if (user.Password != password)
+            {
+                Console.WriteLine("Password mismatch.");
+                ViewBag.ErrorMessage = "Invalid username or password.";
+                return View();
+            }
+
+            Console.WriteLine("Login successful!");
+
+            // Save user role and username in session
             HttpContext.Session.SetString("UserRole", user.Role);
-            if (user.Role == "Lecturer")
+            HttpContext.Session.SetString("Username", user.Username);
+
+            // Redirect based on role
+            return user.Role switch
             {
-                return RedirectToAction("ClaimSubmission");
-            }
-            else if (user.Role == "Manager" || user.Role == "Coordinator")
-            {
-                return RedirectToAction("ClaimApproval");
-            }
+                "lecturer" => RedirectToAction("ClaimSubmission"),
+                "admin" => RedirectToAction("ClaimApproval"),
+                _ => RedirectToAction("Index"),
+            };
+
         }
 
-        ViewBag.ErrorMessage = "Invalid username or password.";
-        return View();
-    }
 
 
-    private string ValidateClaim(Claim claim)
+        private string ValidateClaim(Claim claim)
         {
             // Example rules
             if (claim.Hours > 80)

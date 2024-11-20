@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ClaimSystem.Models
 {
@@ -38,10 +39,11 @@ namespace ClaimSystem.Models
 
     }
 
+    [Table("User")]
     public class User
     {
         [Key]
-        public int UserID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -49,10 +51,9 @@ namespace ClaimSystem.Models
 
         [Required]
         [MaxLength(255)]
-        public string PasswordHash { get; set; }
+        public string Password { get; set; } // Plain text password for simplicity
 
         [Required]
-        [MaxLength(20)]
-        public string Role { get; set; }
+        public string Role { get; set; } // 'lecturer' or 'admin'
     }
 }

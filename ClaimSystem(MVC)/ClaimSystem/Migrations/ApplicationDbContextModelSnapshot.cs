@@ -30,6 +30,9 @@ namespace ClaimSystem.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClaimID"));
 
+                    b.Property<string>("AutoStatus")
+                        .HasColumnType("longtext");
+
                     b.Property<decimal>("HourlyRate")
                         .HasColumnType("decimal(65,30)");
 
@@ -49,6 +52,15 @@ namespace ClaimSystem.Migrations
                     b.Property<string>("OriginalFileName")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("OverriddenBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OverriddenStatus")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ReasonForOverride")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -56,9 +68,39 @@ namespace ClaimSystem.Migrations
                     b.Property<string>("SupportingDocumentPath")
                         .HasColumnType("longtext");
 
+                    b.Property<decimal>("TotalPayment")
+                        .HasColumnType("decimal(65,30)");
+
                     b.HasKey("ClaimID");
 
                     b.ToTable("Claims");
+                });
+
+            modelBuilder.Entity("ClaimSystem.Models.User", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("User");
                 });
 #pragma warning restore 612, 618
         }

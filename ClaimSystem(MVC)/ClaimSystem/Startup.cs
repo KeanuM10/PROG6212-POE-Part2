@@ -8,7 +8,6 @@ using ClaimSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using ClaimSystem.Data;
 
-
 namespace ClaimSystem
 {
     public class Startup
@@ -22,7 +21,6 @@ namespace ClaimSystem
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Existing ConfigureServices code
             services.AddControllersWithViews();
 
             services.AddSession(options =>
@@ -32,7 +30,6 @@ namespace ClaimSystem
                 options.Cookie.IsEssential = true;
             });
 
-            // Add MySQL database context
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(
                     Configuration.GetConnectionString("DefaultConnection"),
@@ -41,66 +38,68 @@ namespace ClaimSystem
             );
         }
 
-        // Method to configure 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // Set culture of app - uses 'en-US' - this allows '.' to be the decimal operator
             var supportedCultures = new[] { new CultureInfo("en-US") };
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture("en-US"),  // Default culture set - "en-US"
+                DefaultRequestCulture = new RequestCulture("en-US"),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             });
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();  // Show errors
+                app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");  // Go to error page in production
-                app.UseHsts();  
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
-            app.UseHttpsRedirection();  // Redirect to HTTPS
-            app.UseStaticFiles();  
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseStatusCodePagesWithReExecute("/Home/StatusCode", "?code={0}");
+            app.UseSession();
+            app.UseAuthorization();
 
-            app.UseSession(); // Use session
-            app.UseAuthorization();  
-
-            // Routing for application
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");  // Way to Home controllers Index (action)
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            SeedUsers(app.ApplicationServices.GetRequiredService<ApplicationDbContext>());
-
+            SeedUsers(app.ApplicationServices);
         }
 
-        private void SeedUsers(ApplicationDbContext context)
+        private void SeedUsers(IServiceProvider serviceProvider)
         {
-            if (!context.Users.Any())
+            using (var scope = serviceProvider.CreateScope())
             {
-                var users = new List<User>
-        {
-            new User { Username = "lecturer1", PasswordHash = BCrypt.Net.BCrypt.HashPassword("lecturer1pass"), Role = "Lecturer" },
-            new User { Username = "lecturer2", PasswordHash = BCrypt.Net.BCrypt.HashPassword("lecturer2pass"), Role = "Lecturer" },
-            new User { Username = "lecturer3", PasswordHash = BCrypt.Net.BCrypt.HashPassword("lecturer3pass"), Role = "Lecturer" },
-            new User { Username = "manager", PasswordHash = BCrypt.Net.BCrypt.HashPassword("managerpass"), Role = "Manager" },
-            new User { Username = "coordinator", PasswordHash = BCrypt.Net.BCrypt.HashPassword("coordinatorpass"), Role = "Coordinator" }
-        };
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                context.Users.AddRange(users);
-                context.SaveChanges();
+                if (!context.Users.Any())
+                {
+                    var users = new List<User>
+                    {
+                        new User { Username = "John", Password = "lecturer1pass", Role = "lecturer" },
+                        new User { Username = "Rosa", Password = "lecturer2pass", Role = "lecturer" },
+                        new User { Username = "Manager", Password = "manpass", Role = "admin" },
+                        new User { Username = "Coordinator", Password = "copass", Role = "admin" }
+                    };
+
+                    context.Users.AddRange(users);
+                    context.SaveChanges();
+                    Console.WriteLine("Seed users added successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Users already exist. Skipping seeding.");
+                }
             }
         }
-
     }
 }
