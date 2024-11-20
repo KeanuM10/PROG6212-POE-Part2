@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ClaimSystem.Models.Claim>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml"; // Use the app wide layout
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use the app-wide layout
     ViewData["Title"] = "Claim Approval";  // Page title
 }
 
@@ -17,11 +17,12 @@
                 <th>Document</th>
                 <th>Notes</th>
                 <th>Auto Status</th>
+                <th>Override Reason</th>
                 <th>Override</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Loop through claims in model - show detials -->
+            <!-- Loop through claims in model - show details -->
             @foreach (var claim in Model)
             {
                 <tr>
@@ -29,22 +30,20 @@
                     <td>@claim.Hours.ToString("F2")</td>
                     <td>@claim.HourlyRate.ToString("F2")</td>
                     <td>@claim.TotalPayment.ToString("F2")</td>
-
                     <td>
                         @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
                         {
-                            <!-- Display original file name - visible only to managers -->
-                        <a href="@Url.Content("~/uploads/" + System.IO.Path.GetFileName(claim.SupportingDocumentPath))" target="_blank">
-                            @claim.OriginalFileName
-                        </a>
+                            <!-- Display original file name -->
+                            <a href="@Url.Content("~/uploads/" + System.IO.Path.GetFileName(claim.SupportingDocumentPath))" target="_blank">
+                                @claim.OriginalFileName
+                            </a>
                         }
                         else
                         {
-                        <span>No document</span>
+                            <span>No document</span>
                         }
                     </td>
                     <td>@claim.Notes</td>
-
                     <td>
                         @if (!string.IsNullOrEmpty(claim.OverriddenStatus))
                         {
@@ -59,48 +58,38 @@
                             <span class="badge bg-warning">Pending Validation</span>
                         }
                     </td>
-
+                    <td>@claim.ReasonForOverride</td>
                     <td>
-                        <form method="post" action="@Url.Action("OverrideDecision", "Home")">
-                            <input type="hidden" name="id" value="@claim.ClaimID" />
-                            <input type="hidden" name="action" value="Approve" />
-                            <button class="btn btn-success btn-sm">Approve</button>
-                        </form>
-                        <form method="post" action="@Url.Action("OverrideDecision", "Home")">
-                            <input type="hidden" name="id" value="@claim.ClaimID" />
-                            <input type="hidden" name="action" value="Reject" />
-                            <button class="btn btn-danger btn-sm">Reject</button>
-                        </form>
+                        <button class="btn btn-success btn-sm" onclick="openOverrideModal(@claim.ClaimID, 'Approve')">Approve</button>
+                        <button class="btn btn-danger btn-sm" onclick="openOverrideModal(@claim.ClaimID, 'Reject')">Reject</button>
                     </td>
                 </tr>
             }
-            <a href="@Url.Action("GenerateReport", "Home")" class="btn btn-primary mb-3">Download PDF Report</a>
         </tbody>
     </table>
+    <a href="@Url.Action("GenerateReport", "Home")" class="btn btn-primary mt-3">Download PDF Report</a>
 </div>
 
 <!-- Modal for adding override reason -->
-<div class="modal fade" id="overrideModal" tabindex="-1" role="dialog" aria-labelledby="overrideModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="overrideModal" tabindex="-1" aria-labelledby="overrideModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="overrideModalLabel">Override Decision</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="overrideModalLabel">Provide Reason for Override</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="post" action="@Url.Action("OverrideDecision", "Home")">
                 <div class="modal-body">
                     <input type="hidden" id="claimId" name="id" />
                     <input type="hidden" id="overrideAction" name="action" />
                     <div class="form-group">
-                        <label for="reason">Reason for Override:</label>
-                        <textarea id="reason" name="reason" class="form-control" placeholder="Enter reason for override" required></textarea>
+                        <label for="reason">Reason:</label>
+                        <textarea id="reason" name="reason" class="form-control" rows="3" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit Override</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
@@ -111,7 +100,7 @@
     function openOverrideModal(claimId, action) {
         document.getElementById("claimId").value = claimId;
         document.getElementById("overrideAction").value = action;
+        document.getElementById("reason").value = ""; // Clear reason input
         $('#overrideModal').modal('show');
     }
 </script>
-

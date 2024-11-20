@@ -257,7 +257,7 @@ namespace ClaimSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult OverrideDecision(int id, string action)
+        public IActionResult OverrideDecision(int id, string action, string reason)
         {
             var claim = _context.Claims.FirstOrDefault(c => c.ClaimID == id);
             if (claim == null)
@@ -271,16 +271,18 @@ namespace ClaimSystem.Controllers
                 return Unauthorized();
             }
 
-            // Update the claim status based on the action
+            // Update claim status and reason
             claim.OverriddenStatus = action == "Approve" ? "Approved" : "Rejected";
             claim.OverriddenBy = userRole;
-            claim.Status = claim.OverriddenStatus; // Update claim status
+            claim.ReasonForOverride = reason;
+            claim.Status = claim.OverriddenStatus;
             claim.LastUpdated = DateTime.Now;
 
             _context.SaveChanges();
 
             return RedirectToAction("ClaimApproval");
         }
+
 
         public IActionResult GenerateReport()
         {
