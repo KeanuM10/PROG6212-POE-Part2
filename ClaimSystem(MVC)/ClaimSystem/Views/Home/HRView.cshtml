@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ClaimSystem.Models.User>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "HR Management";
+}
+
+<div class="container mt-5">
+    <h2>HR Management</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <form method="post" action="@Url.Action("UpdateUser", "Home")">
+                    <td>
+                        <input type="hidden" name="ID" value="@user.ID" />
+                            @user.ID
+                    </td>
+                    <td>
+                        <input type="text" name="Username" value="@user.Username" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="text" name="Password" value="@user.Password" class="form-control" />
+                    </td>
+                    <td>
+                        <select name="Role" class="form-control">
+                                @foreach (var role in new[] { "lecturer", "admin", "hr" })
+                                {
+                                    if (user.Role == role)
+                                    {
+                                    <option value="@role" selected>@role</option>
+                                    }
+                                    else
+                                    {
+                                    <option value="@role">@role</option>
+                                    }
+                                }
+                        </select>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                    </td>
+                    </form>
+                    <td>
+                        <form method="post" action="@Url.Action("DeleteUser", "Home")" style="display:inline;">
+                            <input type="hidden" name="ID" value="@user.ID" />
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="@Url.Action("GenerateReport", "Home")" class="btn btn-primary mt-3">Download PDF Report</a>
+</div>

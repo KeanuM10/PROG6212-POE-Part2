@@ -19,6 +19,7 @@ namespace ClaimSystem
             Configuration = configuration;
         }
 
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -88,7 +89,8 @@ namespace ClaimSystem
                         new User { Username = "John", Password = "lecturer1pass", Role = "lecturer" },
                         new User { Username = "Rosa", Password = "lecturer2pass", Role = "lecturer" },
                         new User { Username = "Manager", Password = "manpass", Role = "admin" },
-                        new User { Username = "Coordinator", Password = "copass", Role = "admin" }
+                        new User { Username = "Coordinator", Password = "copass", Role = "admin" },
+                        new User { Username = "HR", Password = "hrpassword", Role = "hr" }
                     };
 
                     context.Users.AddRange(users);

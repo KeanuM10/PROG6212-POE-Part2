@@ -9,14 +9,9 @@ namespace ClaimSystem.Models
         public int ClaimID { get; set; }
 
         [Required]
-        public string Lecturer { get; set; } = string.Empty;
-
-        [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Hours worked must be greater than zero.")]
         public decimal Hours { get; set; }
 
         [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Hourly rate must be greater than zero.")]
         public decimal HourlyRate { get; set; }
 
         public string? Notes { get; set; } = string.Empty;
@@ -38,6 +33,7 @@ namespace ClaimSystem.Models
         public string? ReasonForOverride { get; set; } // Reason provided by admin
 
     }
+
 
     [Table("User")]
     public class User

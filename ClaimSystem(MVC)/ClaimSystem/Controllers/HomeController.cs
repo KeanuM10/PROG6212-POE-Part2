@@ -96,7 +96,7 @@ namespace ClaimSystem.Controllers
             }
 
             // Calculate total payment
-            decimal totalPayment = Math.Round(hoursWorked * hourlyRate, 2); ;
+            decimal totalPayment = Math.Round(hoursWorked * hourlyRate, 2);
 
             // Save the claim to the database
             var newClaim = new Claim
@@ -108,7 +108,7 @@ namespace ClaimSystem.Controllers
                 Status = "Pending",
                 LastUpdated = DateTime.Now,
                 SupportingDocumentPath = filePath,
-                OriginalFileName = originalFileName
+                OriginalFileName = originalFileName,
             };
 
             // Automated validation
@@ -134,7 +134,7 @@ namespace ClaimSystem.Controllers
         // ClaimStatus action - displays status of submitted claims
         public IActionResult ClaimStatus()
         {
-            if (HttpContext.Session.GetString("UserRole") != "admin")
+            if (HttpContext.Session.GetString("UserRole") != "lecturer")
             {
                 return RedirectToAction("Login");
             }
@@ -227,10 +227,11 @@ namespace ClaimSystem.Controllers
             {
                 "lecturer" => RedirectToAction("ClaimSubmission"),
                 "admin" => RedirectToAction("ClaimApproval"),
+                "hr" => RedirectToAction("HRView"),
                 _ => RedirectToAction("Index"),
             };
-
         }
+
 
 
 
@@ -265,7 +266,7 @@ namespace ClaimSystem.Controllers
             }
 
             var userRole = HttpContext.Session.GetString("UserRole");
-            if (userRole != "Coordinator" && userRole != "Manager")
+            if (userRole != "admin")
             {
                 return Unauthorized();
             }
@@ -315,14 +316,13 @@ namespace ClaimSystem.Controllers
                 document.Add(new Paragraph($"Total Hours for Approved Claims: {totalApprovedHours:F2}\n\n", summaryFont));
 
                 // Approved Claims Details Table
-                var table = new PdfPTable(6);
+                var table = new PdfPTable(5); // Adjust column count
                 table.WidthPercentage = 100;
-                table.SetWidths(new[] { 10f, 20f, 10f, 10f, 20f, 30f }); // Adjust widths as needed
+                table.SetWidths(new[] { 10f, 15f, 10f, 20f, 45f }); // Adjust column widths
 
                 // Table Headers
                 var headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
                 table.AddCell(new PdfPCell(new Phrase("Claim ID", headerFont)));
-                table.AddCell(new PdfPCell(new Phrase("Lecturer", headerFont)));
                 table.AddCell(new PdfPCell(new Phrase("Hours", headerFont)));
                 table.AddCell(new PdfPCell(new Phrase("Total Payment", headerFont)));
                 table.AddCell(new PdfPCell(new Phrase("Last Updated", headerFont)));
@@ -333,7 +333,6 @@ namespace ClaimSystem.Controllers
                 foreach (var claim in approvedClaims)
                 {
                     table.AddCell(new PdfPCell(new Phrase(claim.ClaimID.ToString(), cellFont)));
-                    table.AddCell(new PdfPCell(new Phrase(claim.Lecturer, cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(claim.Hours.ToString("F2"), cellFont)));
                     table.AddCell(new PdfPCell(new Phrase($"R{claim.TotalPayment:F2}", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(claim.LastUpdated.ToString("dd MMM yyyy"), cellFont)));
@@ -347,6 +346,49 @@ namespace ClaimSystem.Controllers
 
                 return File(stream.ToArray(), "application/pdf", "ApprovedClaimsReport.pdf");
             }
+        }
+
+        // Display HR view
+        public IActionResult HRView()
+        {
+            // Only allow access if the user is HR
+            if (HttpContext.Session.GetString("UserRole") != "hr")
+            {
+                return RedirectToAction("Login");
+            }
+
+            var users = _context.Users.ToList(); // Fetch all users for the HR view
+            return View(users);
+        }
+
+        // Handle user updates
+        [HttpPost]
+        public IActionResult UpdateUser(int id, string username, string password, string role)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.ID == id);
+            if (user != null)
+            {
+                user.Username = username;
+                user.Password = password;
+                user.Role = role;
+                _context.SaveChanges(); // Save changes to the database
+            }
+
+            return RedirectToAction("HRView"); // Refresh the HR view
+        }
+
+        // Optional: Delete User (if required)
+        [HttpPost]
+        public IActionResult DeleteUser(int id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.ID == id);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                _context.SaveChanges(); // Save changes to the database
+            }
+
+            return RedirectToAction("HRView"); // Refresh the HR view
         }
 
 

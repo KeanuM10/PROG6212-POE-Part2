@@ -55,11 +55,13 @@
                     {
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("ClaimApproval", "Home")">Claim Approval</a></li>
                     }
+                    @if (Context.Session.GetString("UserRole") == "hr")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("HRView", "Home")">HR Management</a>
+                        </li>
+                    }
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Logout", "Home")">Logout</a></li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Logout", "Home")">Logout</a>
-                    </li>
                 </ul>
             </div>
         </div>

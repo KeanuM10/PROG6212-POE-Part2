@@ -42,10 +42,6 @@ namespace ClaimSystem.Migrations
                     b.Property<DateTime>("LastUpdated")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Lecturer")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Notes")
                         .HasColumnType("longtext");
 
