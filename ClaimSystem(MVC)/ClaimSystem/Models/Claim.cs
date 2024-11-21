@@ -14,7 +14,7 @@ namespace ClaimSystem.Models
         [Required]
         public decimal HourlyRate { get; set; }
 
-        public string? Notes { get; set; } = string.Empty;
+        public string? Notes { get; set; } = "None";
 
         [Required]
         public string Status { get; set; } = "Pending";

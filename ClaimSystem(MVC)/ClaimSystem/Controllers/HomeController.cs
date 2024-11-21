@@ -41,6 +41,8 @@ namespace ClaimSystem.Controllers
         [HttpPost]
         public IActionResult SubmitClaim(decimal hoursWorked, decimal hourlyRate, string notes, IFormFile document)
         {
+            notes ??= "None";
+
             // Validate file upload
             string filePath = null;
             string originalFileName = null;
@@ -75,25 +77,48 @@ namespace ClaimSystem.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine($"File upload error: {ex.Message}");
                     ModelState.AddModelError("", "An unexpected error occurred while uploading the document.");
                     return View("ClaimSubmission");
                 }
             }
 
+            if (string.IsNullOrWhiteSpace(notes))
+            {
+                notes = "None";
+                ModelState.Remove("notes");
+                Console.WriteLine($"Does it run the loop {notes}");
+
+            } else
+            {
+                notes = notes;
+            }
+
+            ModelState.Remove("notes");
+
             if (!ModelState.IsValid)
             {
+
+                ViewData["hoursWorked"] = hoursWorked;
+                ViewData["hourlyRate"] = hourlyRate;
+                ViewData["notes"] = notes;
+
+                // Debugging ModelState errors
+                foreach (var key in ModelState.Keys)
+                {
+                    var errors = ModelState[key].Errors;
+                    foreach (var error in errors)
+                    {
+                        Console.WriteLine($"ModelState Error for {key}: {error.ErrorMessage}");
+                    }
+                }
+
                 return View("ClaimSubmission");
             }
 
-            notes = string.IsNullOrWhiteSpace(notes) ? "None" : notes;
-
-            if (notes == "" || notes == null)
-            {
-                notes = "None"; 
-            }
 
             // Calculate total payment
-           decimal totalPayment = Math.Round(hoursWorked * hourlyRate, 2);
+            decimal totalPayment = Math.Round(hoursWorked * hourlyRate, 2);
 
             // Save the claim to the database
             var newClaim = new Claim

@@ -13,12 +13,12 @@
     <form id="claimForm" method="post" enctype="multipart/form-data" action="@Url.Action("SubmitClaim", "Home")">
         <div class="form-group">
             <label for="hoursWorked">Hours Worked:</label>
-            <input type="number" id="hoursWorked" name="hoursWorked" class="form-control" placeholder="Enter hours worked" step="0.01" required />
+            <input type="number" id="hoursWorked" name="hoursWorked" class="form-control" placeholder="Enter hours worked" step="0.01" value="@ViewData["hoursWorked"]" required />
         </div>
 
         <div class="form-group">
             <label for="hourlyRate">Hourly Rate:</label>
-            <input type="number" id="hourlyRate" name="hourlyRate" class="form-control" placeholder="Enter hourly rate" step="0.01" required />
+            <input type="number" id="hourlyRate" name="hourlyRate" class="form-control" placeholder="Enter hourly rate" step="0.01" value="@ViewData["hourlyRate"]" required />
         </div>
 
         <div class="form-group">
@@ -28,7 +28,13 @@
 
         <div class="form-group">
             <label for="notes">Additional Notes:</label>
-            <textarea id="notes" name="notes" class="form-control" placeholder="Add any additional notes here" rows="4"></textarea>
+            <textarea id="notes" name="notes" class="form-control" placeholder="Add any additional notes here" rows="4">@ViewData["notes"]</textarea>
+            <input type="hidden" name="notes" value="None" id="hiddenNotes" />
+            <script>
+                document.getElementById("notes").addEventListener("input", function () {
+                    document.getElementById("hiddenNotes").value = this.value.trim() || "None";
+                });
+            </script>
         </div>
 
         <div class="form-group">
