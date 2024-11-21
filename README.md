@@ -1,64 +1,123 @@
-#Overview
+#Contract Monthly Claim System
 
-The Claim System allows lecturers to submit claims for the hours they've worked, including uploading supporting documents. Coordinators and managers can review, approve, or reject these claims. The system keeps track of the current status of each claim.
+Overview:
 
-#Features:
+The Contract Monthly Claim System is a web-based application designed to streamline the submission, tracking, and approval of monthly claims for contract-based employees, particularly lecturers. The system enables efficient management of claims, ensuring transparency, accountability, and ease of use for all stakeholders.
 
-Lecturer Claim Submission: Lecturers can submit their claims with hours worked and hourly rates.
-File Upload: Optional file upload for supporting documents (PDF, DOCX, XLSX - Max 5MB).
-Claim Approval/Reject: Coordinators and managers can view all pending claims and either approve or reject them (They are also able to view the uploaded documents both in the app, and in the saved file).
-Status Tracking: Claim statuses are tracked (Pending, Approved, Rejected). These statuses are updated in real-time based on the manager / coordinators actions.
-Role-based Access: Lecturers, coordinators, and managers have different roles within the application (Managers and coordinators have the same functionality) .
+Features:
 
-#Technologies Used:
-ASP.NET Core MVC: Backend framework
-Razor Views: Frontend rendering
-Bootstrap 4: Responsive styling
-XUnit: Unit testing framework
-Moq: Mocking framework for unit tests
+Core Features -
 
-#Getting Started:
-- Prerequisites:
-- 
-Before you begin, ensure you have the following installed:
-.NET SDK
-Visual Studio 2022
-SQL Server or another relational database (For future reference, currently I am using in-memory data for simplicity).
+●	Lecturer Claim Submission:
+Lecturers can submit claims with details such as hours worked, hourly rate, and additional notes.
+  
+●	File Upload:
+Lecturers can upload optional supporting documents (PDF, DOCX, XLSX - Max 5MB).
+  
+●	Claim Approval/Rejection:
+Admins can view pending claims, approve/reject them, and provide override reasons if necessary.
+Supporting documents are accessible directly from the app.
 
-#Running the Application:
+●	Status Tracking:
+Claims are categorised as Approved, or Rejected, with real-time updates based on admin actions.
+Auto-approval or rejection based on predefined validation rules.
 
-Build and run the application by pressing F5 or selecting Start Debugging in Visual Studio 2022.
-The application will launch in your default browser.
+●	Override Reason Logging:
+Admins can provide detailed reasons for overriding automated decisions, ensuring accountability.
 
-Use the following credentials for login:
-Lecturer - 
-Username: lecturer 
-Password: 123
-Coordinator - 
-Username: coordinator 
-password: 123
-Manager -
-username: manager
-password: 123
+●	User Management:
+HR Managers can view, update, or delete user accounts, including changing roles and credentials.
 
-#Running Unit Tests:
+●	PDF Reporting:
+Generate professional, detailed PDF reports of approved claims for record-keeping or auditing.
 
-In Visual Studio, navigate to the Test Explorer by going to Test - Test Explorer.
-Run all unit tests by selecting the Run All button.
-The tests are written using the XUnit framework, (Moq used for mocking dependencies).
+Role-Based Access -
+●	Lecturers: Submit claims, upload documents, and track claim statuses.
+●	Admins: Approve/reject claims, provide override reasons, and generate reports.
+●	HR Managers: Manage user accounts and roles with full access to user data, they can also generate extensive reports.
 
-#How to Use:
+Technologies Used -
+●	ASP.NET Core MVC: Backend framework for building scalable, secure applications.
+●	Razor Views: Simplified and dynamic frontend rendering.
+●	Bootstrap 4: For responsive and user-friendly styling.
+●	iText: Creating of PDF reports
+●	MySQL: Database management.
+
+Getting Started:
+
+Prerequisites -
+
+Before running the application, ensure the following are installed:
+●	.NET SDK
+●	Visual Studio 2022
+●	MySQL or another relational database
+●	WampServer or any other server side validation software
+
+Running the Application -
+1.	Open the project in Visual Studio 2022.
+2.	Open and run Wampserver or an equivalent.
+3.	Open MySQL or another relation database.
+4.	Create and import the necessary database tables and values with the provided SQL script.
+5.	Build and run the application by pressing F5 or selecting Start Debugging.
+6.	The application will launch in your default browser.
+
+Login Credentials -
+
+●	Lecturer:
+Username: John
+Password: lecturer1pass
+
+●	Admin:
+Username: Manager
+Password: manpass
+
+●	HR Manager:
+Username: HR
+Password: hrpassword
+
+How to Use:
 
 Submitting a Claim (Lecturer) -
-Login as a lecturer with the provided credentials.
-Navigate to Submit Claim.
-Fill in the form with the hours worked (Required), hourly rate (Required), and any additional notes (Optional).
-Optionally, upload a supporting document (PDF, DOCX, XLSX).
-Click Submit Claim.
-You will be redirected to the Claim Status page to view the current status of your claim, as well as the other claims submitted by lecturers (Pending / Approved / Rejected).
+1.	Log in as a Lecturer.
+2.	Navigate to Submit Claim.
+3.	Enter the required details:
+○	Hours worked
+○	Hourly rate
+○	Additional notes
+4.	Optionally, upload a supporting document (PDF, DOCX, XLSX).
+5.	Click Submit Claim to save your claim.
+6.	You will be redirected to Claim Status, where you can view the status of your claim.
+7.	Claim Status will show approved or rejected based on predefined criteria, but admins may overrule this outcome.
 
-Approving/Rejecting Claims (Coordinator/Manager) -
-Login as a coordinator or manager with the provided credentials.
-Navigate to Claim Approval.
-View all pending claims, and either approve or reject them by clicking the corresponding buttons.
+Approving/Rejecting Claims (Admin) -
+1.	Log in as an Admin.
+2.	Navigate to Claim Approval.
+3.	Review pending claims.
+4.	Approve or reject claims.
+5.	Optionally provide a reason for overriding the automated decision.
+
+Managing Users (HR Manager) -
+1.	Log in as an HR Manager.
+2.	Navigate to HR Management.
+3.	Update user details or delete accounts as needed.
+4.	Save changes to reflect updates.
+
+Generating Reports (Admin / HR) -
+1.	Navigate to Claim Approval (Admin) or HR Management (HR).
+2.	Click the Download PDF Report button to generate a detailed report of approved claims.
+
+Future Enhancements:
+
+The system is designed to be scalable, with the potential for:
+●	Advanced reporting features.
+●	Integration with external payroll or financial systems.
+●	Automated notifications for claim status updates.
+
+Troubleshooting:
+
+The system should function correctly, if it does not, try troubleshooting:
+●	Ensure the database works correctly, drop and recreate the database, tables and insert statements if necessary.
+●	If the app does not load, try rebuild the system in Visual Studio 2022
+●	Delete Migration files and redo “Add-Migration InitialCreate” if the database does not match the web-apps’ latest info.
+
 
