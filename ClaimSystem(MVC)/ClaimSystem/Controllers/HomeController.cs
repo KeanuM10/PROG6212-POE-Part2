@@ -41,16 +41,6 @@ namespace ClaimSystem.Controllers
         [HttpPost]
         public IActionResult SubmitClaim(decimal hoursWorked, decimal hourlyRate, string notes, IFormFile document)
         {
-            if (hoursWorked <= 0)
-            {
-                ModelState.AddModelError("hoursWorked", "Hours worked must be greater than zero.");
-            }
-
-            if (hourlyRate <= 0)
-            {
-                ModelState.AddModelError("hourlyRate", "Hourly rate must be greater than zero.");
-            }
-
             // Validate file upload
             string filePath = null;
             string originalFileName = null;
@@ -95,8 +85,15 @@ namespace ClaimSystem.Controllers
                 return View("ClaimSubmission");
             }
 
+            notes = string.IsNullOrWhiteSpace(notes) ? "None" : notes;
+
+            if (notes == "" || notes == null)
+            {
+                notes = "None"; 
+            }
+
             // Calculate total payment
-            decimal totalPayment = Math.Round(hoursWorked * hourlyRate, 2);
+           decimal totalPayment = Math.Round(hoursWorked * hourlyRate, 2);
 
             // Save the claim to the database
             var newClaim = new Claim
@@ -104,7 +101,7 @@ namespace ClaimSystem.Controllers
                 Hours = Math.Round(hoursWorked, 2),
                 HourlyRate = Math.Round(hourlyRate, 2),
                 TotalPayment = totalPayment,
-                Notes = string.IsNullOrWhiteSpace(notes) ? "No additional notes" : notes,
+                Notes = notes,
                 Status = "Pending",
                 LastUpdated = DateTime.Now,
                 SupportingDocumentPath = filePath,

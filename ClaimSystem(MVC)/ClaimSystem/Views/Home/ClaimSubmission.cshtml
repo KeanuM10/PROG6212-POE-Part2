@@ -1,28 +1,26 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml"; // Use the site wide layout
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use the site-wide layout
     ViewData["Title"] = "Claim Submission";  // Set page title
 }
 
 <div class="container mt-5">
     <h2>Claim Submission</h2>
 
-    <!-- Display Validation Errors (Summary) -->
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <!-- Display Validation Errors -->
+    <div id="validationMessage" class="text-danger mb-3"></div>
 
-    <!-- Form - submit the claim (Updated with hourly rate and notes)-->
-    <form method="post" enctype="multipart/form-data" action="@Url.Action("SubmitClaim", "Home")">
+    <!-- Form - submit the claim -->
+    <form id="claimForm" method="post" enctype="multipart/form-data" action="@Url.Action("SubmitClaim", "Home")">
         <div class="form-group">
             <label for="hoursWorked">Hours Worked:</label>
             <input type="number" id="hoursWorked" name="hoursWorked" class="form-control" placeholder="Enter hours worked" step="0.01" required />
         </div>
 
-        <!-- Hourly rate set to 0.01 - allows decimals (will be better later on) -->
         <div class="form-group">
             <label for="hourlyRate">Hourly Rate:</label>
             <input type="number" id="hourlyRate" name="hourlyRate" class="form-control" placeholder="Enter hourly rate" step="0.01" required />
         </div>
 
-        <!-- Auto-Calculated Payment -->
         <div class="form-group">
             <label for="totalPayment">Total Payment:</label>
             <input type="text" id="totalPayment" class="form-control" readonly />
@@ -32,41 +30,61 @@
             <label for="notes">Additional Notes:</label>
             <textarea id="notes" name="notes" class="form-control" placeholder="Add any additional notes here" rows="4"></textarea>
         </div>
-        <!-- Supporting Document Upload -->
+
         <div class="form-group">
             <label for="document">Supporting Document (PDF, DOCX, XLSX - Max 5MB):</label>
             <input type="file" id="document" name="document" class="form-control-file" accept=".pdf,.docx,.xlsx" />
             <span class="text-danger">@ViewData.ModelState["document"]?.Errors.FirstOrDefault()?.ErrorMessage</span>
         </div>
 
-
-        <!-- Submit button -->
-        <div>
-            <button type="submit" class="btn btn-success" style="width: 200px; height: 40px;">Submit Claim</button>
-        </div>
+        <button type="submit" class="btn btn-success mt-3" style="width: 200px; height: 40px;">Submit Claim</button>
     </form>
-    <!-- Link - view claim status -->
-    <div>
-        <a href="@Url.Action("ClaimStatus", "Home")" class="btn btn-secondary mt-3" style="width: 200px; height: 40px;">Go to Claim Status</a>
-    </div>
+
+    <a href="@Url.Action("ClaimStatus", "Home")" class="btn btn-secondary mt-3" style="width: 200px; height: 40px;">Go to Claim Status</a>
 </div>
 
 <script>
-    // Auto-calculation logic
     document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("claimForm");
         const hoursWorkedInput = document.getElementById("hoursWorked");
         const hourlyRateInput = document.getElementById("hourlyRate");
         const totalPaymentInput = document.getElementById("totalPayment");
+        const validationMessage = document.getElementById("validationMessage");
 
+        // Auto-calculate total payment
         function calculateTotalPayment() {
             const hoursWorked = parseFloat(hoursWorkedInput.value) || 0;
             const hourlyRate = parseFloat(hourlyRateInput.value) || 0;
             const totalPayment = hoursWorked * hourlyRate;
-            totalPaymentInput.value = totalPayment.toFixed(2); // Format to 2 decimal places
+            totalPaymentInput.value = totalPayment.toFixed(2);
         }
 
-        // Add event listeners to recalculate on input change
         hoursWorkedInput.addEventListener("input", calculateTotalPayment);
         hourlyRateInput.addEventListener("input", calculateTotalPayment);
+
+        // Validate form inputs on submit
+        form.addEventListener("submit", function (e) {
+            let isValid = true;
+            let message = "";
+
+            // Validate hours worked
+            if (hoursWorkedInput.value <= 0 || /[^0-9.]/.test(hoursWorkedInput.value)) {
+                isValid = false;
+                message += "Hours Worked must be a positive number.<br/>";
+            }
+
+            // Validate hourly rate
+            if (hourlyRateInput.value <= 0 || /[^0-9.]/.test(hourlyRateInput.value)) {
+                isValid = false;
+                message += "Hourly Rate must be a positive number.<br/>";
+            }
+
+            if (!isValid) {
+                e.preventDefault(); // Prevent form submission
+                validationMessage.innerHTML = message; // Display validation message
+            } else {
+                validationMessage.innerHTML = ""; // Clear any previous validation messages
+            }
+        });
     });
 </script>
